@@ -1,25 +1,58 @@
-import "./Expenses.css";
 import ExpenseDate from "./ExpenseDate";
 import ExpenseDetails from "./ExpenseDetails";
 import Card from "../UI/Card";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 function Expenses(props) {
   const changeTitle = () => {
-    console.log('Clicked!!!')
-  }
+    console.log("Clicked!!!");
+  };
+
   const delEvent = () => {
     const expenseItem = document.getElementById(props.id);
     if (expenseItem) {
       expenseItem.remove();
     }
-  }
+  };
+
   return (
-    <Card className="expenseItem">
-      <ExpenseDate date={props.date} />
-      <ExpenseDetails title={props.title} amount={props.amount} location={props.location} />
-      <button onClick={changeTitle}>Change Title</button>
-      <button onClick={delEvent}>Delete Expense</button>
-    </Card>
+    <Container>
+      <Card className="expenseItem border">
+        <Row className="align-items-center">
+          <Col xs={4} md={3}>
+            <ExpenseDate date={props.date} />
+          </Col>
+          <Col xs={6} md={6}>
+            <Row>
+              <Col>
+                <ExpenseDetails title={props.title} />
+              </Col>
+              <Col>
+                <ExpenseDetails location={props.location} />
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={2} md={3} className="text-center">
+            <div className="d-flex justify-content-center">
+              <Button
+                variant="primary"
+                size="sm"
+                className="mr-2"
+                onClick={changeTitle}
+              >
+                Change Title
+              </Button>
+              <Button variant="danger" size="sm" onClick={delEvent}>
+                Delete Expense
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Card>
+    </Container>
   );
 }
 
