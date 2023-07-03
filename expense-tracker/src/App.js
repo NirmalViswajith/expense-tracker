@@ -10,25 +10,25 @@ function App() {
     {
       date: new Date(2023, 4, 21),
       title: "Car Insurance",
-      amount: "1000",
+      amount: "$1000",
       location: "Bangalore",
     },
     {
       date: new Date(2023, 4, 22),
       title: "Hotel",
-      amount: "870",
+      amount: "$870",
       location: "Bangalore",
     },
     {
       date: new Date(2023, 4, 23),
       title: "Shopping",
-      amount: "10000",
+      amount: "$10000",
       location: "Bangalore",
     },
     {
       date: new Date(2023, 4, 24),
       title: "Party",
-      amount: "10000",
+      amount: "$10000",
       location: "Bangalore",
     },
   ];
