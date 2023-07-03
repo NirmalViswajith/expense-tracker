@@ -1,7 +1,0 @@
-.expenseItem {
-  display: flex;
-  align-items: center;
-  gap: 100px;
-  border-style: groove;
-  padding: 10px;
-}
