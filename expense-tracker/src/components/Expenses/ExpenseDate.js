@@ -1,5 +1,3 @@
-
-
 const ExpenseDate = (props) => {
   const month = props.date.toLocaleString("en-IN", { month: "long" });
   const day = props.date.toLocaleString("en-IN", { day: "2-digit" });
