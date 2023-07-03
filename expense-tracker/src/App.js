@@ -37,14 +37,13 @@ function App() {
     <Container fluid>
       <Card className="App">
         <h1 className="text-center my-4">Expense Items</h1>
-        {expenses.map((expense, index) => (
-          <Row key={index} className="mb-3">
-            <Expenses className='border p-3'
+        {expenses.map((expense) => (
+          <Row className="mb-3">
+            <Expenses className="border p-3"
               date={expense.date}
               title={expense.title}
               amount={expense.amount}
               location={expense.location}
-              id={`expense-${index}`}
             />
           </Row>
         ))}

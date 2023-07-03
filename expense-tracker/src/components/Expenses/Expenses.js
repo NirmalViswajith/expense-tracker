@@ -22,12 +22,12 @@ function Expenses(props) {
     <Container>
       <Card className="expenseItem border">
         <Row className="align-items-center">
-          <Col xs={4} md={3}>
+          <Col xs={12} md={3}>
             <ExpenseDate date={props.date} />
           </Col>
-          <Col xs={6} md={6}>
-            <Row>
-              <Col>
+          <Col xs={12} md={6}>
+            <Row >
+              <Col className="ml-3">
                 <ExpenseDetails title={props.title} />
               </Col>
               <Col>
@@ -35,14 +35,10 @@ function Expenses(props) {
               </Col>
             </Row>
           </Col>
-          <Col xs={2} md={3} className="text-center">
-            <div className="d-flex justify-content-center">
-              <Button
-                variant="primary"
-                size="sm"
-                className="mr-2"
-                onClick={changeTitle}
-              >
+          <Col xs={12} md={3} className="text-center">
+            <div className="d-flex justify-content-center mr-2">
+              <Button variant="primary" size="sm" className="mr-2" onClick={changeTitle}
+>
                 Change Title
               </Button>
               <Button variant="danger" size="sm" onClick={delEvent}>
