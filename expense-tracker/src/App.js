@@ -4,6 +4,8 @@ import Card from "./components/UI/Card";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
+import NewExpense from "./components/Form/NewExpenses";
+
 
 function App() {
   const expenses = [
@@ -37,6 +39,7 @@ function App() {
     <Container fluid>
       <Card className="App">
         <h1 className="text-center my-4">Expense Items</h1>
+        <NewExpense />
         {expenses.map((expense) => (
           <Row className="mb-3">
             <Expenses className="border p-3"
