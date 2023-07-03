@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Expenses from "./components/Expenses/Expenses";
 import Card from "./components/UI/Card";
 import Row from "react-bootstrap/Row";
@@ -8,7 +8,7 @@ import NewExpense from "./components/Form/NewExpenses";
 
 
 function App() {
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
       date: new Date(2023, 4, 21),
       title: "Car Insurance",
@@ -33,13 +33,16 @@ function App() {
       amount: "$10000",
       location: "Bangalore",
     },
-  ];
+  ]);
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => [expense,...prevExpenses]);
+  }
 
   return (
     <Container fluid>
       <Card className="App">
         <h1 className="text-center my-4">Expense Items</h1>
-        <NewExpense />
+        <NewExpense saveData={addExpenseHandler} />
         {expenses.map((expense) => (
           <Row className="mb-3">
             <Expenses className="border p-3"
