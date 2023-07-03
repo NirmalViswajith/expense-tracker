@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import ExpenseDate from "./ExpenseDate";
 import ExpenseDetails from "./ExpenseDetails";
 import Card from "../UI/Card";
@@ -7,16 +8,17 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 function Expenses(props) {
+  const [title, setTitle] = useState(props.title);
+
   const changeTitle = () => {
-    console.log("Clicked!!!");
+    setTitle("updated");
   };
 
-  const delEvent = () => {
-    const expenseItem = document.getElementById(props.id);
-    if (expenseItem) {
-      expenseItem.remove();
-    }
-  };
+  const [amount, setAmount] = useState(props.amount);
+  const increment = () => {
+    const updatedAmount = `$${Number(amount.replace('$','')) + 100}` 
+    setAmount(updatedAmount);
+  }
 
   return (
     <Container>
@@ -26,23 +28,28 @@ function Expenses(props) {
             <ExpenseDate date={props.date} />
           </Col>
           <Col xs={12} md={6}>
-            <Row >
+            <Row>
               <Col className="ml-3">
-                <ExpenseDetails title={props.title} />
+                <ExpenseDetails title={title} />
               </Col>
               <Col>
                 <ExpenseDetails location={props.location} />
+              </Col>
+              <Col>
+                <ExpenseDetails amount={amount} />
               </Col>
             </Row>
           </Col>
           <Col xs={12} md={3} className="text-center">
             <div className="d-flex justify-content-center mr-2">
-              <Button variant="primary" size="sm" className="mr-2" onClick={changeTitle}
->
+              <Button variant="primary" size="sm" className="mr-2" onClick={increment}>+100</Button>
+              <Button
+                variant="primary"
+                size="sm"
+                className="mr-2"
+                onClick={changeTitle}
+              >
                 Change Title
-              </Button>
-              <Button variant="danger" size="sm" onClick={delEvent}>
-                Delete Expense
               </Button>
             </div>
           </Col>
