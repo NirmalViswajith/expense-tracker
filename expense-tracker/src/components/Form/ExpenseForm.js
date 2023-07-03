@@ -19,9 +19,19 @@ const ExpenseForm = () => {
     updatedDate(event.target.value);
   }
 
+  const submitHandler = (event) => {
+    event.preventDefault(); // Prevent form submission
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate)
+    };
+    console.log(expenseData);
+  };
+
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <Form className='p-2'>
+      <Form className='p-2' onSubmit={submitHandler}>
         <Form.Group controlId='title'>
           <Form.Label style={{ color: 'black' }}>Expense Title</Form.Label>
           <Form.Control type='text' style={{ borderColor: 'black' }} onChange={newTitle} />
