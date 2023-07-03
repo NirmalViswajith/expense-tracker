@@ -2,9 +2,9 @@ import React from "react";
 import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
-  const saveExpense = (data) => {
+  const saveExpense = (onSaveData) => {
     const expenseData = {
-      ...data,
+      ...onSaveData,
       id : Math.random().toString()
     }
     props.saveData(expenseData);

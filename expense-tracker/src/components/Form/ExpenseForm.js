@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 const ExpenseForm = (props) => {
-  const inputChange = (event) => {
-    console.log(event.target.value);
-  };
-
   const [enteredTitle, updatedTitle] = useState("");
   const newTitle = (event) => {
     updatedTitle(event.target.value);
   };
+  const [enteredLocation, updatedLocation] = useState("");
+  const newLocation = (event) => {
+    updatedLocation(event.target.value);
+  }
   const [enteredAmount, updatedAmount] = useState("");
   const newAmount = (event) => {
     updatedAmount(event.target.value);
@@ -24,11 +24,13 @@ const ExpenseForm = (props) => {
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
+      location: enteredLocation,
       date: new Date(enteredDate),
     };
     props.onSaveData(expenseData);
     updatedTitle("");
     updatedAmount("");
+    updatedLocation("");
     updatedDate("");
    };
 
@@ -55,6 +57,13 @@ const ExpenseForm = (props) => {
             onChange={newAmount}
           />
         </Form.Group>
+        <Form.Label style={{ color: "black" }}>Expense Location</Form.Label>
+          <Form.Control
+            type="text"
+            style={{ borderColor: "black" }}
+            value={enteredLocation}
+            onChange={newLocation}
+          />
         <Form.Group controlId="date">
           <Form.Label style={{ color: "black" }}>Expense date</Form.Label>
           <Form.Control
