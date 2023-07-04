@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NewExpense from "./components/Form/NewExpenses";
+import ExpenseFilter from "./components/Expenses/ExpenseFilter";
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -42,11 +43,20 @@ function App() {
     setExpenses((prevExpenses) => [expense, ...prevExpenses]);
   };
 
+  const [filteredYear, setFilteredYear] = useState("2020");
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  };
+
   return (
     <Container fluid>
+      <h1 className="text-center my-4">Expense Items</h1>
+      <NewExpense saveData={addExpenseHandler} />
       <Card className="App">
-        <h1 className="text-center my-4">Expense Items</h1>
-        <NewExpense saveData={addExpenseHandler} />
+        <ExpenseFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
         {expenses.map((expense) => (
           <Row key={expense.id} className="mb-3">
             <Expenses

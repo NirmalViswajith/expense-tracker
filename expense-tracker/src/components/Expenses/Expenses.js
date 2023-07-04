@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ExpenseFilter from "./ExpenseFilter";
+
 
 function Expenses(props) {
   const [title, setTitle] = useState(props.title);
@@ -17,18 +17,15 @@ function Expenses(props) {
 
   const [amount, setAmount] = useState(props.amount);
   const increment = () => {
-    const updatedAmount = `$${Number(amount.replace('$','')) + 100}` 
+    const updatedAmount = `$${Number(amount.replace("$", "")) + 100}`;
     setAmount(updatedAmount);
-  }
+  };
 
-  const [filteredYear, setFilteredYear] = useState('2020');
-  const filterChangedHandler = (selectedYear) => {
-    setFilteredYear(selectedYear);
-  }
+  
+
   return (
-    <Container style={{maxWidth:"850px"}}>
-      <Card className="expenseItem border">
-        <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangedHandler} />
+    <Container style={{ maxWidth: "850px" }}>
+      <Card className="expenseItem border"> 
         <Row className="align-items-center">
           <Col xs={12} md={3}>
             <ExpenseDate date={props.date} />
@@ -48,7 +45,14 @@ function Expenses(props) {
           </Col>
           <Col xs={12} md={3} className="text-center">
             <div className="d-flex justify-content-center mr-2">
-              <Button variant="primary" size="sm" className="mr-2" onClick={increment}>+100</Button>
+              <Button
+                variant="primary"
+                size="sm"
+                className="mr-2"
+                onClick={increment}
+              >
+                +100
+              </Button>
               <Button
                 variant="primary"
                 size="sm"

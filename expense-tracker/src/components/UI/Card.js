@@ -1,7 +1,13 @@
+import React from "react";
+import Container from "react-bootstrap/Container";
 
 const Card = (props) => {
   const classes = 'card ' + props.className;
-  return <div className={classes}>{props.children}</div>
-}
+  return (
+    <Container className={classes} style={{maxWidth: "900px",justifyContent: "center",display: "flex"}}>
+      {props.children}
+    </Container>
+  );
+};
 
 export default Card;
