@@ -5,34 +5,34 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NewExpense from "./components/Form/NewExpenses";
-import ExpenseFilter from "./components/Expenses/ExpenseFilter";
+
 
 function App() {
   const [expenses, setExpenses] = useState([
     {
-      id: "e1",
-      date: new Date(2023, 4, 21),
+      
+      date: new Date(2020, 4, 21),
       title: "Car Insurance",
       amount: "$1000",
       location: "Bangalore",
     },
     {
-      id: "e2",
-      date: new Date(2023, 4, 22),
+      
+      date: new Date(2021, 4, 22),
       title: "Hotel",
       amount: "$870",
       location: "Bangalore",
     },
     {
-      id: "e3",
+      
       date: new Date(2023, 4, 23),
       title: "Shopping",
       amount: "$10000",
       location: "Bangalore",
     },
     {
-      id: "e4",
-      date: new Date(2023, 4, 24),
+    
+      date: new Date(2022, 4, 24),
       title: "Party",
       amount: "$10000",
       location: "Bangalore",
@@ -40,34 +40,17 @@ function App() {
   ]);
 
   const addExpenseHandler = (expense) => {
-    setExpenses((prevExpenses) => [expense, ...prevExpenses]);
+    setExpenses((prevExpenses) => { return [expense, ...prevExpenses]});
   };
 
-  const [filteredYear, setFilteredYear] = useState("2020");
-  const filterChangeHandler = (selectedYear) => {
-    setFilteredYear(selectedYear);
-  };
+  
 
   return (
     <Container fluid>
       <h1 className="text-center my-4">Expense Items</h1>
       <NewExpense saveData={addExpenseHandler} />
       <Card className="App">
-        <ExpenseFilter
-          selected={filteredYear}
-          onChangeFilter={filterChangeHandler}
-        />
-        {expenses.map((expense) => (
-          <Row key={expense.id} className="mb-3">
-            <Expenses
-              className="border p-3"
-              date={expense.date}
-              title={expense.title}
-              amount={expense.amount}
-              location={expense.location}
-            />
-          </Row>
-        ))}
+        <Expenses expenses={expenses} />
       </Card>
     </Container>
   );

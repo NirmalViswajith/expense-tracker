@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 const Card = (props) => {
   const classes = 'card ' + props.className;
   return (
-    <Container className={classes} style={{maxWidth: "900px",justifyContent: "center",display: "flex"}}>
+    <Container className={`${classes} border-dark`} style={{ maxWidth: "900px", justifyContent: "center", display: "flex" }}>
       {props.children}
     </Container>
   );
