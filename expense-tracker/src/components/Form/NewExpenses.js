@@ -10,7 +10,7 @@ const NewExpense = (props) => {
     props.saveData(expenseData);
   }
   return (
-    <div className="container border p-2 my-5 border-dark rounded" style={{ maxWidth: "425px" }}>
+    <div className="container border p-2 my-5 border-dark rounded" style={{ maxWidth: "820px" }}>
       <ExpenseForm onSaveData={saveExpense}/>
     </div>
   );

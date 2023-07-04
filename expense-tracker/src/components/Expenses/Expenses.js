@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import ExpenseFilter from "./ExpenseFilter";
 
 function Expenses(props) {
   const [title, setTitle] = useState(props.title);
@@ -20,9 +21,14 @@ function Expenses(props) {
     setAmount(updatedAmount);
   }
 
+  const [filteredYear, setFilteredYear] = useState('2020');
+  const filterChangedHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  }
   return (
-    <Container>
+    <Container style={{maxWidth:"850px"}}>
       <Card className="expenseItem border">
+        <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangedHandler} />
         <Row className="align-items-center">
           <Col xs={12} md={3}>
             <ExpenseDate date={props.date} />

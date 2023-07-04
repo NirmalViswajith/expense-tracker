@@ -35,7 +35,7 @@ const ExpenseForm = (props) => {
    };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+    <div style={{ margin: "0 auto" }}>
       <Form className="p-2" onSubmit={submit}>
         <Form.Group controlId="title">
           <Form.Label style={{ color: "black" }}>Expense Title</Form.Label>
