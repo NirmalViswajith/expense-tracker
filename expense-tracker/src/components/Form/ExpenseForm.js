@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const ExpenseForm = (props) => {
   const [enteredTitle, updatedTitle] = useState("");
@@ -9,7 +11,7 @@ const ExpenseForm = (props) => {
   const [enteredLocation, updatedLocation] = useState("");
   const newLocation = (event) => {
     updatedLocation(event.target.value);
-  }
+  };
   const [enteredAmount, updatedAmount] = useState("");
   const newAmount = (event) => {
     updatedAmount(event.target.value);
@@ -32,7 +34,7 @@ const ExpenseForm = (props) => {
     updatedAmount("");
     updatedLocation("");
     updatedDate("");
-   };
+  };
 
   return (
     <div style={{ margin: "0 auto" }}>
@@ -58,12 +60,12 @@ const ExpenseForm = (props) => {
           />
         </Form.Group>
         <Form.Label style={{ color: "black" }}>Expense Location</Form.Label>
-          <Form.Control
-            type="text"
-            style={{ borderColor: "black" }}
-            value={enteredLocation}
-            onChange={newLocation}
-          />
+        <Form.Control
+          type="text"
+          style={{ borderColor: "black" }}
+          value={enteredLocation}
+          onChange={newLocation}
+        />
         <Form.Group controlId="date">
           <Form.Label style={{ color: "black" }}>Expense date</Form.Label>
           <Form.Control
@@ -73,6 +75,7 @@ const ExpenseForm = (props) => {
             onChange={newDate}
           />
           <button className="btn-dark my-3">Add Expenses</button>
+          <button className="btn-dark m-3" onCancel={props.onCancel}>Cancel</button>
         </Form.Group>
       </Form>
     </div>
