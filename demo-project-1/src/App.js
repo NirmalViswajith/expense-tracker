@@ -29,12 +29,12 @@ function App() {
   }
 
   return (
-    <div>
+    <div >
       <Container >
         <section>
           <FormInput onAddGoal={addGoalHandler} />
         </section>
-        <section>{content}</section>
+        <section className="d-flex justify-content-center">{content}</section>
       </Container>
     </div>
   );

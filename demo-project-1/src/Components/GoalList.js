@@ -8,7 +8,7 @@ const GoalList = (props) => {
     </ListItem>
   ));
   return (
-    <div className="d-flex justify-content-center">
+    <div>
       <ul style={{ fontWeight: "bold" }}>{list}</ul>
     </div>
   );
