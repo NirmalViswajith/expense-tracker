@@ -23,6 +23,7 @@ const ExpenseForm = (props) => {
   const submit = (event) => {
     event.preventDefault(); // Prevent form submission
     const expenseData = {
+      id: Math.random().toString(),
       title: enteredTitle,
       amount: +enteredAmount,
       location: enteredLocation,

@@ -19,7 +19,7 @@ function Expenses(props) {
     <Card className="expenseItem border my-3" style={{ maxWidth: "850px" }}>
       <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
       <ExpensesChart expenses={filteredExpenses} />
-        <ExpensesList items={filteredExpenses} />
+      <ExpensesList items={filteredExpenses} onDeleteExpense={props.onDeleteExpense} />
     </Card>
   );
 }
