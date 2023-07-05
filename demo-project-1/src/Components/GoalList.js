@@ -1,0 +1,17 @@
+import React from "react";
+import ListItem from "./ListItem";
+
+const GoalList = (props) => {
+  const list = props.items.map((goal) => (
+    <ListItem key={goal.id} id={goal.id} onDelete={props.onDeleteItem}>
+      {goal.text}
+    </ListItem>
+  ));
+  return (
+    <div className="d-flex justify-content-center">
+      <ul style={{ fontWeight: "bold" }}>{list}</ul>
+    </div>
+  );
+};
+
+export default GoalList;
