@@ -9,31 +9,34 @@ import NewExpense from "./components/Form/NewExpenses";
 function App() {
   const [expenses, setExpenses] = useState([
     {
-      date: new Date(2021, 4, 21),
-      title: "Car Insurance",
-      amount: "$1000",
-      location: "Bangalore",
+      id: 'e1',
+      title: 'Toilet Paper',
+      amount: 94.12,
+      location: 'Banglore',
+      date: new Date(2020, 7, 14),
+    },
+    { 
+      id: 'e2', 
+      title: 'New TV', 
+      amount: 799.49, 
+      location: 'Banglore',
+      date: new Date(2021, 2, 12) 
     },
     {
-      date: new Date(2021, 4, 22),
-      title: "Hotel",
-      amount: "$870",
-      location: "Bangalore",
+      id: 'e3',
+      title: 'Car Insurance',
+      amount: 294.67,
+      location: 'Banglore',
+      date: new Date(2021, 2, 28),
     },
     {
-      date: new Date(2023, 4, 23),
-      title: "Shopping",
-      amount: "$10000",
-      location: "Bangalore",
-    },
-    {
-      date: new Date(2022, 4, 24),
-      title: "Party",
-      amount: "$10000",
-      location: "Bangalore",
-    },
+      id: 'e4',
+      title: 'New Desk (Wooden)',
+      amount: 450,
+      location: 'Banglore',
+      date: new Date(2021, 5, 12),
+    }
   ]);
-
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => { return [expense, ...prevExpenses]});
   };

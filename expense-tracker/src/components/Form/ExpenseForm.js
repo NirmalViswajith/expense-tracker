@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
+
 
 const ExpenseForm = (props) => {
   const [enteredTitle, updatedTitle] = useState("");
@@ -25,7 +24,7 @@ const ExpenseForm = (props) => {
     event.preventDefault(); // Prevent form submission
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       location: enteredLocation,
       date: new Date(enteredDate),
     };
