@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import UserButton from "./UserButton";
 import Error from "./Error";
+import "./error.css";
 
 const UserForm = (props) => {
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
   const [enteredName, setName] = useState("");
   const [enteredAge, setAge] = useState("");
-  const [errorVisible, setErrorVisible] = useState(false);
 
   const userName = (event) => {
     setName(event.target.value);
@@ -21,18 +21,14 @@ const UserForm = (props) => {
     event.preventDefault();
     if (enteredName.trim().length === 0 && enteredAge.trim().length === 0) {
       setError({
-        title: 'Invalid Input',
-        message: 'Please enter a valid name and age'
+        title: "Invalid Input",
+        message: "Please enter a valid name and age",
       });
-      setErrorVisible(true);
-      return;
     } else if (enteredAge < 0) {
       setError({
-        title: 'Invalid Input',
-        message: 'Age must be > 0'
+        title: "Invalid Input",
+        message: "Age must be > 0",
       });
-      setErrorVisible(true);
-      return;
     } else {
       const userDetails = {
         userName: enteredName,
@@ -44,16 +40,13 @@ const UserForm = (props) => {
     setAge("");
   };
 
-  const showError = () => {
-    setErrorVisible(false);
+  const hideError = () => {
+    setError(null);
   };
 
   return (
-    <div
-      className="container border p-3 my-5 border-dark rounded bg-dark text-light"
-      style={{ maxWidth: "600px" }}
-    >
-      <Form style={{ maxWidth: "700px" }} onSubmit={userSubmit}>
+    <div className="container border p-3 my-5 border-dark rounded bg-dark text-light" style={{ maxWidth: "600px" }}>
+      <Form  onSubmit={userSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label style={{ fontWeight: "bold" }}>Username</Form.Label>
           <Form.Control
@@ -74,7 +67,11 @@ const UserForm = (props) => {
         </Form.Group>
         <UserButton type="submit" onClick={userSubmit} />
       </Form>
-      {errorVisible && <Error title={error.title} message={error.message} onOkayClick={showError} />}
+      {error && (
+        <div className="error-popup">
+          <Error title={error.title} message={error.message} onOkayClick={hideError} />
+        </div>
+      )}
     </div>
   );
 };

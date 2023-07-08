@@ -6,13 +6,7 @@ import User from "./Components/User";
 import Row from "react-bootstrap/Row";
 
 function App() {
-  const [user, setUser] = useState([
-    {
-      userName: 'Nirmal',
-      userAge: 21,
-      id: Math.random().toString()
-    }
-  ]);
+  const [user, setUser] = useState([]);
   const newUser = (user) => {
     setUser((prevUser) => {
       const newUser = {userName: user.userName, userAge: user.userAge, id:Math.random().toString()};
