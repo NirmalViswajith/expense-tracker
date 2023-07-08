@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import UserButton from "./UserButton";
 import Error from "./Error";
 
 const UserForm = (props) => {
-  const [error, setError] = useState({
-    title: "noerror",
-    message: 'nomessage'
-  });
+  const [error, setError] = useState();
   const [enteredName, setName] = useState("");
   const [enteredAge, setAge] = useState("");
   const [errorVisible, setErrorVisible] = useState(false);
@@ -23,7 +19,7 @@ const UserForm = (props) => {
 
   const userSubmit = (event) => {
     event.preventDefault();
-    if (enteredName.trim().length === 0 && enteredAge === 0) {
+    if (enteredName.trim().length === 0 && enteredAge.trim().length === 0) {
       setError({
         title: 'Invalid Input',
         message: 'Please enter a valid name and age'
@@ -48,7 +44,7 @@ const UserForm = (props) => {
     setAge("");
   };
 
-  const handleOkayClick = () => {
+  const showError = () => {
     setErrorVisible(false);
   };
 
@@ -78,11 +74,7 @@ const UserForm = (props) => {
         </Form.Group>
         <UserButton type="submit" onClick={userSubmit} />
       </Form>
-      {errorVisible && (
-        <div>
-          <Error title={error.title} message={error.message} onOkayClick={handleOkayClick} />
-        </div>
-      )}
+      {errorVisible && <Error title={error.title} message={error.message} onOkayClick={showError} />}
     </div>
   );
 };
