@@ -13,9 +13,8 @@ function App() {
 
   const addGoalHandler = (enteredText) => {
     setCareerGoals((prevGoals) => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      return updatedGoals;
+      const newGoal = { text: enteredText, id: Math.random().toString() };
+      return [newGoal, ...prevGoals];
     });
   };
 
