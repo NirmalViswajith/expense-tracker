@@ -1,43 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import UserButton from "./UserButton";
 import Error from "./Error";
 import "./error.css";
 
 const UserForm = (props) => {
+  
   const [error, setError] = useState(null);
-  const [enteredName, setName] = useState("");
-  const [enteredAge, setAge] = useState("");
 
-  const userName = (event) => {
-    setName(event.target.value);
-  };
-
-  const userAge = (event) => {
-    setAge(event.target.value);
-  };
+  const enteredName = useRef();
+  const enteredAge = useRef();
+  const enteredCollege = useRef();
 
   const userSubmit = (event) => {
     event.preventDefault();
-    if (enteredName.trim().length === 0 && enteredAge.trim().length === 0) {
+    const name = enteredName.current.value;
+    const age = enteredAge.current.value;
+    const college = enteredCollege.current.value;
+    if (name.trim().length === 0 || college.trim().length === 0|| age.trim().length === 0) {
       setError({
         title: "Invalid Input",
-        message: "Please enter a valid name and age",
+        message: "Please enter a valid name and age (non-empty vlaues)",
       });
-    } else if (enteredAge < 0) {
+    } else if (age < 0) {
       setError({
         title: "Invalid Input",
         message: "Age must be > 0",
       });
     } else {
       const userDetails = {
-        userName: enteredName,
-        userAge: enteredAge,
+        userName: name,
+        userCollege: college,
+        userAge: age,
       };
       props.addNewUser(userDetails);
+      enteredName.current.value = '';
+      enteredAge.current.value = '';
+      enteredCollege.current.value = '';
     }
-    setName("");
-    setAge("");
+    
   };
 
   const hideError = () => {
@@ -47,22 +48,28 @@ const UserForm = (props) => {
   return (
     <div className="container border p-3 my-5 border-dark rounded bg-dark text-light" style={{ maxWidth: "600px" }}>
       <Form  onSubmit={userSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-3">
           <Form.Label style={{ fontWeight: "bold" }}>Username</Form.Label>
           <Form.Control
             type="text"
-            value={enteredName}
             className="border-dark"
-            onChange={userName}
+            ref={enteredName}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-3">
+          <Form.Label style={{ fontWeight: "bold" }}>College/University</Form.Label>
+          <Form.Control
+            type="text"
+            className="border-dark"
+            ref={enteredCollege}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label style={{ fontWeight: "bold" }}>Age(Years)</Form.Label>
           <Form.Control
             type="number"
-            value={enteredAge}
             className="border-dark"
-            onChange={userAge}
+            ref={enteredAge}
           />
         </Form.Group>
         <UserButton type="submit" onClick={userSubmit} />
