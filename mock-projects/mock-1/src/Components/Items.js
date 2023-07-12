@@ -7,7 +7,7 @@ const Items = (props) => {
   const foodItems = [];
   const skincareItems = [];
 
-  props.products.forEach((product) => {
+  props.products.map((product) => {
     const item = (
       <ItemsList
         key={product.id}

@@ -4,14 +4,14 @@ import Form from "react-bootstrap/Form";
 import AddButton from "./Button";
 
 const ItemsForm = (props) => {
-  const [enteredId, setId] = useState("");
+  // const [enteredId, setId] = useState("");
   const [enteredAmount, setAmount] = useState("");
   const [enteredName, setName] = useState("");
   const [enteredCategory, setCategory] = useState("Electronic Items");
 
-  const idHandler = (event) => {
-    setId(event.target.value);
-  };
+  // const idHandler = (event) => {
+  //   setId(event.target.value);
+  // };
 
   const amountHandler = (event) => {
     setAmount(event.target.value);
@@ -28,13 +28,13 @@ const ItemsForm = (props) => {
   const formSubmit = (event) => {
     event.preventDefault();
     const product = {
-      id: enteredId,
+      id: Math.random().toString(),
       amount: enteredAmount,
       name: enteredName,
       category: enteredCategory,
     };
     props.onProducts(product);
-    setId("");
+    // setId("");
     setAmount("");
     setName("");
     setCategory("Electronic Items");
@@ -43,17 +43,17 @@ const ItemsForm = (props) => {
   return (
     <Container className="my-5 p-3 border border-dark rounded bg-light" style={{ fontWeight: "bold", maxWidth: "600px" }}>
       <Form onSubmit={formSubmit}>
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label>ProductID: </Form.Label>
           <Form.Control type="number" value={enteredId} onChange={idHandler} />
+        </Form.Group> */}
+         <Form.Group>
+          <Form.Label>Product Name:</Form.Label>
+          <Form.Control type="text" value={enteredName} onChange={nameHandler} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Product Amount:</Form.Label>
           <Form.Control type="number" value={enteredAmount} onChange={amountHandler} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Product Name:</Form.Label>
-          <Form.Control type="text" value={enteredName} onChange={nameHandler} />
         </Form.Group>
         <Form.Group>
           <Form.Label className="my-2">Choose a category:</Form.Label>

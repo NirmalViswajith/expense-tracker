@@ -1,5 +1,5 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import Button from "react-bootstrap/Button";
 
 const ItemsList = (props) => {
   const handleDelete = () => {
@@ -9,8 +9,8 @@ const ItemsList = (props) => {
 
   return (
     <li>
-      {props.id} - {props.amount} - {props.name} - {props.category}
-      <Button className='mx-2 my-2' onClick={handleDelete}>
+      {props.amount} - {props.name} - {props.category}
+      <Button className="mx-2 my-2" onClick={handleDelete}>
         Delete Product
       </Button>
     </li>
