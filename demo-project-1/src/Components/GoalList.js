@@ -9,6 +9,7 @@ const GoalList = (props) => {
   ));
   return (
     <div>
+      <h1>hi</h1>
       <ul style={{ fontWeight: "bold" }}>{list}</ul>
     </div>
   );

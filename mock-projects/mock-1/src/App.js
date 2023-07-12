@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState , useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ItemsForm from "./Components/ItemsForm";
+import Items from "./Components/Items";
 function App() {
+  const [products, setProducts] = useState([
+    {
+      id: "1",
+      amount: "35000",
+      name: "play station",
+      category: "Electronic Items",
+    },
+  ]);
+  const deleteProduct = (id) => {
+    const updatedProducts = products.filter((product) => product.id !== id);
+    setProducts(updatedProducts);
+  };
+
+  useEffect(() => {
+    products.forEach((products) => {
+      localStorage.setItem(`${products.id}`, JSON.stringify(products));
+    })
+  },[products])
+
+  const productHandler = (newProduct) => {
+    setProducts((prevProducts) => {
+      return [...prevProducts, newProduct];
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ItemsForm onProducts={productHandler} />
+      <Items products={products} onDelete={deleteProduct} />
     </div>
   );
 }
