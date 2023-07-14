@@ -1,0 +1,12 @@
+.weather-report-heading {
+  font-weight: bold;
+  color: #333;
+}
+
+.weather-report-content {
+  background: linear-gradient(to right, pink, red, orange);
+  color: #333;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
