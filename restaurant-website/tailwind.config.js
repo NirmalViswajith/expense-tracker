@@ -18,7 +18,9 @@ module.exports = {
         'bermuda': '#78dcca',
         'green900': '#134e4a' ,
         'orange': '#c2410c',
-        'red': '#b91c1c'
+        'red': '#b91c1c',
+        'gray': '#1f2937',
+        'zinc': '#383838'
       },
     },
   },
