@@ -57,7 +57,7 @@ const Report = (props) => {
   useEffect(() => {
     if (!isLoading) {
       const timer = setTimeout(() => {
-        setDisplayText("Veliya Paathu Neeye Therinjiko!!! 😊");
+        setDisplayText("Best you can check it outside by yourself😂");
       }, 9000);
 
       return () => {
