@@ -1,5 +1,6 @@
-import FoodList from "./FoodList";
+import React from "react";
 import Container from 'react-bootstrap/Container';
+import FoodList from "./FoodList";
 
 const FoodMenu = (props) => {
   const items = props.items.map((food) => (
@@ -13,7 +14,7 @@ const FoodMenu = (props) => {
   ));
 
   return (
-    <Container className=' rounded p-2 shadow my-2 mb-0 bg-light' style={{maxWidth:'700px'}}>
+    <Container className=' rounded p-2 shadow my-2 mb-0 bg-light' style={{ maxWidth:'700px' }}>
       <ul>{items}</ul>
     </Container>
   );

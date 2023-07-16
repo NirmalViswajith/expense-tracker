@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import CartContext from "./Store/cartContext";
@@ -10,22 +10,12 @@ const Header = (props) => {
     return currNumber + item.quantity;
   }, 0);
 
-  const headerStyle = {
-    position: "fixed",
-    top: 0,
-    width: "100%",
-    zIndex: 999,
-  };
-
   return (
-    <div className="bg-red" style={headerStyle}>
+    <div className="bg-red" style={{ position: "fixed", top: 0, width: "100%", zIndex: 999 }}>
       <Container className="d-flex justify-between align-items-center">
         <h1 className="text-xlg text-white">ReactMeals</h1>
-        <Button
-          className="d-flex align-items-center btn-warning"
-          onClick={props.onOpen}
-        >
-           <svg
+        <Button className="d-flex align-items-center btn-warning" onClick={props.onOpen}>
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

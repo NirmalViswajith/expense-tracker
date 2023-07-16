@@ -5,10 +5,10 @@ import CartContext from "./Store/cartContext";
 
 const FoodList = (props) => {
   const cartCtx = useContext(CartContext);
-  const [quantity, setQuantity] = useState(null);
+  const [quantity, setQuantity] = useState(0);
 
   const quantityChangeHandler = (event) => {
-    setQuantity(event.target.value);
+    setQuantity(+event.target.value);
   };
 
   const addToCartHandler = () => {
@@ -17,9 +17,10 @@ const FoodList = (props) => {
       name: props.name,
       description: props.description,
       amount: props.amount,
-      quantity: +quantity,
+      quantity: quantity,
     };
     cartCtx.addItem(item);
+    setQuantity(0);
   };
 
   return (

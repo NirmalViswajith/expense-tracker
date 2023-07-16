@@ -1,46 +1,81 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import CartContext from "./cartContext";
 
+const cartReducer = (state, action) => {
+  if (action.type === "ADD_ITEM") {
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+
+    if (existingItemIndex !== -1) {
+      const existingItem = state.items[existingItemIndex];
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity + action.item.quantity,
+      };
+      const updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+
+      return {
+        items: updatedItems,
+      };
+    } else {
+      const updatedItems = state.items.concat(action.item);
+      return {
+        items: updatedItems,
+      };
+    }
+  }
+
+  if (action.type === "DECREASE_QUANTITY") {
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+
+    if (existingItemIndex !== -1) {
+      const existingItem = state.items[existingItemIndex];
+      const updatedQuantity = existingItem.quantity - 1;
+
+      if (updatedQuantity === 0) {
+        const updatedItems = state.items.filter((item) => item.id !== action.id);
+        return {
+          items: updatedItems,
+        };
+      }
+
+      const updatedItem = {
+        ...existingItem,
+        quantity: updatedQuantity,
+      };
+      const updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+
+      return {
+        items: updatedItems,
+      };
+    }
+  }
+
+  return state;
+};
+
 const CartProvider = (props) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartState, dispatchCartAction] = useReducer(cartReducer, {
+    items: [],
+  });
 
   const addItemHandler = (item) => {
-    setCartItems((prevCartItems) => {
-      // Check if the item is already in the cart
-      const existingItemIndex = prevCartItems.findIndex(
-        (cartItem) => cartItem.id === item.id
-      );
-  
-      if (existingItemIndex !== -1) {
-        // Item already exists, update its amount
-        const updatedCartItems = [...prevCartItems];
-        const existingAmount = parseFloat(updatedCartItems[existingItemIndex].amount);
-        const newAmount = parseFloat(item.amount);
-        updatedCartItems[existingItemIndex].amount = `${(existingAmount + newAmount).toFixed(2)}`;
-        return updatedCartItems;
-      } else {
-        // Item doesn't exist, add it to the cart
-        return prevCartItems.concat(item);
-      }
-    });
+    dispatchCartAction({ type: "ADD_ITEM", item: item });
   };
-  
 
-  const removeItemHandler = (id) => {
-    setCartItems((prevCartItems) => {
-      // Filter out the item with the given id
-      const updatedCartItems = prevCartItems.filter(
-        (cartItem) => cartItem.id !== id
-      );
-      return updatedCartItems;
-    });
+  const decreaseQuantityHandler = (id) => {
+    dispatchCartAction({ type: "DECREASE_QUANTITY", id: id });
   };
 
   const cartContext = {
-    items: cartItems,
-    totalAmount: 0, // Update the total amount calculation if needed
+    items: cartState.items,
     addItem: addItemHandler,
-    removeItem: removeItemHandler,
+    decreaseQuantity: decreaseQuantityHandler,
   };
 
   return (
