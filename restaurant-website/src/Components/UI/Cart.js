@@ -1,4 +1,3 @@
-import classes from "./Cart.Module.css";
 import Model from "./Modal";
 import Button from "react-bootstrap/Button";
 
@@ -18,7 +17,7 @@ const Cart = (props) => {
         <h4>35.62</h4>
       </div>
       <div className="d-flex justify-content-end">
-        <Button variant="dark" className="mr-2">Close</Button>
+        <Button variant="dark" className="mr-2" onClick={props.onClose}>Close</Button>
         <Button variant="primary">Order</Button>
       </div>
     </Model>

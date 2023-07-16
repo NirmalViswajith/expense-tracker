@@ -1,10 +1,10 @@
 import Container from "react-bootstrap/Container";
 import Button from 'react-bootstrap/Button';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="bg-red">
-      <Container className="d-flex justify-between align-items-center">
+      <Container className="d-flex justify-between align-items-center" onClick={props.onOpen}>
         <h1 className="text-xlg text-white">ReactMeals</h1>
         <Button className="d-flex align-items-center btn-warning">
           <svg
