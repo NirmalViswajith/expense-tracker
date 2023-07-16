@@ -1,13 +1,31 @@
+import React, { useContext} from "react";
 import Container from "react-bootstrap/Container";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
+import CartContext from "./Store/cartContext";
 
 const Header = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const numberOfItems = cartCtx.items.reduce((currNumber, item) => {
+    return currNumber + item.quantity;
+  }, 0);
+
+  const headerStyle = {
+    position: "fixed",
+    top: 0,
+    width: "100%",
+    zIndex: 999,
+  };
+
   return (
-    <div className="bg-red">
-      <Container className="d-flex justify-between align-items-center" onClick={props.onOpen}>
+    <div className="bg-red" style={headerStyle}>
+      <Container className="d-flex justify-between align-items-center">
         <h1 className="text-xlg text-white">ReactMeals</h1>
-        <Button className="d-flex align-items-center btn-warning">
-          <svg
+        <Button
+          className="d-flex align-items-center btn-warning"
+          onClick={props.onOpen}
+        >
+           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -22,7 +40,9 @@ const Header = (props) => {
             />
           </svg>
           <h1 className="text-base mb-0">Your Cart</h1>
-          <div className="badge rounded-pill bg-orange ml-2">0</div>
+          <div className="badge rounded-pill bg-orange ml-2">
+            {numberOfItems}
+          </div>
         </Button>
       </Container>
     </div>

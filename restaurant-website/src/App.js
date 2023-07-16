@@ -3,17 +3,18 @@ import Header from "./Components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Summary from "./Components/Summary";
 import Cart from "./Components/UI/Cart";
+import CartProvider from "./Components/Store/CartProvider";
 
 function App() {
   const [cartShow, setCartShow] = useState(false);
 
   const showCartHandler = () => {
     setCartShow(true);
-  }
+  };
 
   const hideCartHandler = () => {
     setCartShow(false);
-  }
+  };
 
   const foodItems = [
     {
@@ -43,13 +44,13 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <CartProvider>
       {cartShow && <Cart onClose={hideCartHandler} />}
-      <Header onOpen = {showCartHandler}/>
+      <Header onOpen={showCartHandler} />
       <main>
         <Summary items={foodItems} />
       </main>
-    </div>
+    </CartProvider>
   );
 }
 
