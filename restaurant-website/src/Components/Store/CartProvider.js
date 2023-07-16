@@ -10,11 +10,13 @@ const CartProvider = (props) => {
       const existingItemIndex = prevCartItems.findIndex(
         (cartItem) => cartItem.id === item.id
       );
-
+  
       if (existingItemIndex !== -1) {
         // Item already exists, update its amount
         const updatedCartItems = [...prevCartItems];
-        updatedCartItems[existingItemIndex].amount += item.amount;
+        const existingAmount = parseFloat(updatedCartItems[existingItemIndex].amount);
+        const newAmount = parseFloat(item.amount);
+        updatedCartItems[existingItemIndex].amount = `${(existingAmount + newAmount).toFixed(2)}`;
         return updatedCartItems;
       } else {
         // Item doesn't exist, add it to the cart
@@ -22,6 +24,7 @@ const CartProvider = (props) => {
       }
     });
   };
+  
 
   const removeItemHandler = (id) => {
     setCartItems((prevCartItems) => {
