@@ -14,7 +14,7 @@ const Header = (props) => {
     <div className="bg-red" style={{ position: "fixed", top: 0, width: "100%", zIndex: 999 }}>
       <Container className="d-flex justify-between align-items-center">
         <h1 className="text-xlg text-white">ReactMeals</h1>
-        <Button className="d-flex align-items-center btn-warning" onClick={props.onOpen}>
+        <Button className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 d-flex align-items-center btn-warning" onClick={props.onOpen}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

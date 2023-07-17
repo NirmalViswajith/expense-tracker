@@ -6,7 +6,6 @@ const cartReducer = (state, action) => {
     const existingItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
-
     if (existingItemIndex !== -1) {
       const existingItem = state.items[existingItemIndex];
       const updatedItem = {
@@ -15,7 +14,6 @@ const cartReducer = (state, action) => {
       };
       const updatedItems = [...state.items];
       updatedItems[existingItemIndex] = updatedItem;
-
       return {
         items: updatedItems,
       };
@@ -27,29 +25,24 @@ const cartReducer = (state, action) => {
     }
   }
 
-  if (action.type === "DECREASE_QUANTITY") {
+  else if (action.type === "DECREASE_QUANTITY") {
     const existingItemIndex = state.items.findIndex(
       (item) => item.id === action.id
     );
-
     if (existingItemIndex !== -1) {
       const existingItem = state.items[existingItemIndex];
-      const updatedQuantity = existingItem.quantity - 1;
-
-      if (updatedQuantity === 0) {
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity - 1,
+      };
+      if (updatedItem.quantity === 0) {
         const updatedItems = state.items.filter((item) => item.id !== action.id);
         return {
           items: updatedItems,
         };
       }
-
-      const updatedItem = {
-        ...existingItem,
-        quantity: updatedQuantity,
-      };
       const updatedItems = [...state.items];
       updatedItems[existingItemIndex] = updatedItem;
-
       return {
         items: updatedItems,
       };

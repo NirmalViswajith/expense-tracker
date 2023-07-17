@@ -20,7 +20,7 @@ module.exports = {
         'orange': '#c2410c',
         'red': '#b91c1c',
         'gray': '#1f2937',
-        'zinc': '#383838'
+        'zinc': '#1e293b'
       },
     },
   },

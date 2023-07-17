@@ -6,6 +6,7 @@ import FoodMenu from "./FoodMenu";
 const Summary = (props) => {
   return (
     <div style={{
+      paddingTop: '5rem',
       backgroundImage: `url(${resImg})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',

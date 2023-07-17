@@ -8,7 +8,7 @@ const FoodList = (props) => {
   const [quantity, setQuantity] = useState(0);
 
   const quantityChangeHandler = (event) => {
-    setQuantity(+event.target.value);
+    setQuantity(+event.target.value); 
   };
 
   const addToCartHandler = () => {

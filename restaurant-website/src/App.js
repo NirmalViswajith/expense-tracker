@@ -18,25 +18,25 @@ function App() {
 
   const foodItems = [
     {
-      id: Math.random().toString(),
+      id: 'e1',
       name: "Sushi",
       description: "Finest fish and veggies",
       amount: "$22.99",
     },
     {
-      id: Math.random().toString(),
+      id: 'e2',
       name: "Schnitzel",
       description: "A German Speciality!!!",
       amount: "$16.50",
     },
     {
-      id: Math.random().toString(),
+      id: 'e3',
       name: "Barbecue Burger",
       description: "American, raw, meaty",
       amount: "$12.99",
     },
     {
-      id: Math.random().toString(),
+      id: 'e4',
       name: "Green Bowl",
       description: "Healthy.... and green...",
       amount: "$18.99",
