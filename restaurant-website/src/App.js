@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "./Components/Header";
+import Header from './Components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Summary from "./Components/Summary";
 import Cart from "./Components/UI/Cart";
