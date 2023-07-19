@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './Components/NavBar';
 import Header from './Components/Header';
-import Products from './Components/Products';
-import Cart from './Components/Cart';
+import Products from './Components/HomePage/Products';
+import Cart from './Components/UI/Cart';
 import CartProvider from './Store/CartProvider';
 
 function App() {
