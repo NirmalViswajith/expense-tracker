@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const NavBar = (props) => {
   return (
     <div className="d-flex bg-dark p-2 fixed-top">
-      <Container className="d-flex justify-content-between" style={{ maxWidth: '700px' }}>
+      <Container className="d-flex justify-content-between align-items-center" style={{ maxWidth: '700px' }}>
         <Navbar className="bg-light">
           <Nav className="me-auto">
             <Link to="/home" className="mr-2">Home</Link>

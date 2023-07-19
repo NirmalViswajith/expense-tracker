@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link } from "react-router-dom";
-import NavBar from "./Components/HomePage/NavBar";
-import Header from "./Components/HomePage/Header";
-import Products from "./Components/HomePage/Products";
+import NavBar from "./Components/StorePage/NavBar";
+import Header from "./Components/StorePage/Header";
+import Products from "./Components/StorePage/Products";
 import Cart from "./Components/UI/Cart";
 import CartProvider from "./Store/CartProvider";
 import About from "./Components/AboutPage/About";
+import HomePage from "./Components/HomePage/HomePage";
+
 
 function App() {
   const [cartShow, setCartShow] = useState(false);
@@ -63,9 +65,17 @@ function App() {
       <NavBar onOpen={showCartHandler} cartItemCount={cartItemCount} />
       <Header />
       <Routes>
-      <Route path="/home" element={<Products productsArr={productsArr} onAddToCart={() => setCartItemCount((prevCount) => prevCount + 1)} />} />
-      <Route path="/about" element={<About />} />
-      
+      <Route path='/home' element={<HomePage />}/>
+        <Route
+          path="/store"
+          element={
+            <Products
+              productsArr={productsArr}
+              onAddToCart={() => setCartItemCount((prevCount) => prevCount + 1)}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
       </Routes>
     </CartProvider>
   );
