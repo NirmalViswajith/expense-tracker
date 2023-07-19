@@ -1,9 +1,13 @@
+import React, { useContext } from "react";
 import { Container, Table, Image, Button } from "react-bootstrap";
 import Modal from "./Modal";
+import CartContext from "../Store/CartContext";
 
 const Cart = (props) => {
+  const ctx = useContext(CartContext);
+
   const renderCartItems = () => {
-    return props.products.map((product) => (
+    return ctx.items.map((product) => (
       <tr key={product.title}>
         <td className="">
           <Image
@@ -19,14 +23,16 @@ const Cart = (props) => {
         <td>${product.price}</td>
         <td className="d-flex align-items-center">
           <span className="border border-primary rounded px-2 mx-2">1</span>
-          <Button variant="danger">Remove</Button>
+          <Button variant="danger" onClick={() => ctx.removeItem(product)}>
+            Remove
+          </Button>
         </td>
       </tr>
     ));
   };
 
-  const totalAmount = props.products.reduce((total, items) => {
-    const amount = items.price;
+  const totalAmount = ctx.items.reduce((total, product) => {
+    const amount = product.price;
     return total + amount;
   }, 0);
 
@@ -38,9 +44,11 @@ const Cart = (props) => {
       >
         <div className="d-flex justify-center align-items-center mb-2">
           <h4 className="flex-grow-1">Cart</h4>
-          <Button variant="outline-dark" onClick={props.onClose}>x</Button>
+          <Button variant="outline-dark" onClick={props.onClose}>
+            x
+          </Button>
         </div>
-        <Table striped bordered hover>
+        <Table>
           <thead>
             <tr>
               <th>Item</th>
