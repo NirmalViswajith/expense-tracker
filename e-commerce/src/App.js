@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './Components/NavBar';
 import Header from './Components/Header';
 import Products from './Components/Products';
-//import Footer from './Components/Footer';
 import Cart from './Components/Cart';
 import CartProvider from './Store/CartProvider';
 
-
 function App() {
   const [cartShow, setCartShow] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
+
   const showCartHandler = () => {
     setCartShow(true);
-  }
+  };
+
   const hideCartHandler = () => {
     setCartShow(false);
-  }
+  };
+
   const productsArr = [
     {
       id:'e1',
@@ -48,12 +50,14 @@ function App() {
   ];
   
   return (
-    <CartProvider >
-      {cartShow && <Cart products={productsArr} onClose={hideCartHandler}/>}
-      <NavBar onOpen={showCartHandler} />
+    <CartProvider>
+      {cartShow && <Cart products={productsArr} onClose={hideCartHandler} onRemoveCart={() => setCartItemCount((prevCount) => prevCount - 1)}/>}
+      <NavBar onOpen={showCartHandler} cartItemCount={cartItemCount} />
       <Header />
-      <Products productsArr={productsArr}/>
-      {/* <Footer /> */}
+      <Products
+        productsArr={productsArr}
+        onAddToCart={() => setCartItemCount((prevCount) => prevCount + 1)}
+      />
     </CartProvider>
   );
 }

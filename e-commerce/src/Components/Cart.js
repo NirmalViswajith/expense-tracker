@@ -23,7 +23,10 @@ const Cart = (props) => {
         <td>${product.price}</td>
         <td className="d-flex align-items-center">
           <span className="border border-primary rounded px-2 mx-2">1</span>
-          <Button variant="danger" onClick={() => ctx.removeItem(product)}>
+          <Button variant="danger" onClick={() => {
+            ctx.removeItem(product);
+            props.onRemoveCart()
+          }}>
             Remove
           </Button>
         </td>
