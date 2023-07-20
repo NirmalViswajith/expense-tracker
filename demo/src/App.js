@@ -8,9 +8,10 @@ function App() {
   const [error, setError] = useState(null);
   const [isRetrying, setRetrying] = useState(false);
 
-  async function fetchItemHandler() {
+  // Fetch movies data from the API
+  async function fetchMoviesData() {
     setIsLoading(true);
-    setError(null); // Reset the error state before fetching
+    setError(null);
 
     try {
       const response = await fetch("https://swapi.dev/api/films/");
@@ -44,9 +45,13 @@ function App() {
   };
 
   useEffect(() => {
+    fetchMoviesData(); // Fetch data when the component is mounted
+  }, []);
+
+  useEffect(() => {
     if (isRetrying) {
       const retry = setTimeout(() => {
-        fetchItemHandler();
+        fetchMoviesData();
       }, 5000);
       return () => clearTimeout(retry);
     }
@@ -55,7 +60,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        <button onClick={fetchItemHandler}>Fetch Movies</button>
+        <button onClick={fetchMoviesData}>Fetch Movies</button>
         {isRetrying && <button onClick={cancelRetry}>Cancel</button>}
       </section>
       <section>
