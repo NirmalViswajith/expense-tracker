@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./Components/StorePage/NavBar";
 import Header from "./Components/StorePage/Header";
 import Products from "./Components/StorePage/Products";
@@ -8,11 +8,12 @@ import Cart from "./Components/UI/Cart";
 import CartProvider from "./Store/CartProvider";
 import About from "./Components/AboutPage/About";
 import HomePage from "./Components/HomePage/HomePage";
-
+import ContactUs from "./Components/ContactPage/ContactUs";
 
 function App() {
   const [cartShow, setCartShow] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(0);
+  const [details, setDetails] = useState([]);
 
   const showCartHandler = () => {
     setCartShow(true);
@@ -53,6 +54,21 @@ function App() {
     },
   ];
 
+  async function postHandler(details) {
+    const response = await fetch(
+      "https://react-app-b039c-default-rtdb.firebaseio.com/customer_details.json",
+      {
+        method: "POST",
+        body: JSON.stringify(details),
+        headers: {
+          "Content-Type": "application/json", // Fixed the header name
+        },
+      }
+    );
+    const data = await response.json(); // Parse the response
+    setDetails(data);
+  }
+
   return (
     <CartProvider>
       {cartShow && (
@@ -65,7 +81,7 @@ function App() {
       <NavBar onOpen={showCartHandler} cartItemCount={cartItemCount} />
       <Header />
       <Routes>
-      <Route path='/home' element={<HomePage />}/>
+        <Route path="/home" element={<HomePage />} />
         <Route
           path="/store"
           element={
@@ -76,6 +92,7 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/contactUs" element={<ContactUs post={postHandler}/>} />
       </Routes>
     </CartProvider>
   );

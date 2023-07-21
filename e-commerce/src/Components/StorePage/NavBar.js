@@ -15,6 +15,7 @@ const NavBar = (props) => {
             <Link to="/home" className="mr-2">Home</Link>
             <Link to="/store" className="mr-2">Store</Link>
             <Link to="/about" className="mr-2">About</Link>
+            <Link to='/contactUs' className='mr-2'>contactUs</Link>
           </Nav>
           <Button variant="outline-light" className="text-dark mx-2" border="white" onClick={props.onOpen}>
             <Badge className="bg-dark">{props.cartItemCount}</Badge>
