@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import classes from './Movie.module.css';
 
-const Movie = memo((props) => {
+const Movie = (props) => {
   return (
     <li className={classes.movie}>
       <h2>{props.title}</h2>
@@ -9,6 +9,6 @@ const Movie = memo((props) => {
       <p>{props.openingText}</p>
     </li>
   );
-});
+};
 
 export default Movie;

@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
-import MoviesList from "./components/MoviesList";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
+import MoviesList from "./components/MoviesList";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import MyForm from "./components/Form";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -8,18 +11,14 @@ function App() {
   const [error, setError] = useState(null);
   const [isRetrying, setRetrying] = useState(false);
 
-  // Fetch movies data from the API
-  async function fetchMoviesData() {
+  const fetchMoviesData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-
     try {
       const response = await fetch("https://swapi.dev/api/films/");
-
       if (!response.ok) {
         throw new Error("Something went wrong....Retrying");
       }
-
       const data = await response.json();
       const transformedDate = data.results.map((results) => ({
         id: results.episode_id,
@@ -32,9 +31,12 @@ function App() {
       setError(error.message);
       RetryingHandler();
     }
-
     setIsLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    fetchMoviesData();
+  }, [fetchMoviesData]);
 
   const RetryingHandler = () => {
     setRetrying(true);
@@ -45,26 +47,23 @@ function App() {
   };
 
   useEffect(() => {
-    fetchMoviesData(); // Fetch data when the component is mounted
-  }, []);
-
-  useEffect(() => {
     if (isRetrying) {
       const retry = setTimeout(() => {
         fetchMoviesData();
       }, 5000);
       return () => clearTimeout(retry);
     }
-  }, [isRetrying]);
+  }, [isRetrying, fetchMoviesData]);
 
   return (
     <React.Fragment>
-      <section>
-        <button onClick={fetchMoviesData}>Fetch Movies</button>
-        {isRetrying && <button onClick={cancelRetry}>Cancel</button>}
+      <MyForm />
+      <section className="d-flex justify-content-center align-items-center my-4">
+        <Button variant='outline-dark' onClick={fetchMoviesData}>Fetch Movies</Button>
+        {isRetrying && <button onClick={cancelRetry} className="btn btn-danger ms-3">Cancel</button>}
       </section>
       <section>
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <div className="d-flex justify-content-center align-items-center my-4">Loading...</div>}
         {!isLoading && <MoviesList movies={movies} />}
         {error && <p>{error}</p>}
       </section>
