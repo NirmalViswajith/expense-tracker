@@ -1,31 +1,34 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-const MyForm = () => {
+
+const MyForm = (props) => {
   const [title, setTitle] = useState("");
+  const [textcrawl, setTextCrawl] = useState("");
+  const [date, setdate] = useState("");
+
   const titleHandler = (event) => {
     setTitle(event.target.value);
   };
-  const [textcrawl, setTextCrawl] = useState("");
+
   const textAreaHandler = (event) => {
     setTextCrawl(event.target.value);
   };
-  const [date, setdate] = useState("");
+
   const dateHandler = (event) => {
     setdate(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const movies = {
-      episode_id: Math.random().toString(),
+    const movie = {
       title: title,
       release_date: date,
       opening_crawl: textcrawl,
-    }
-    console.log(movies);
-    setTitle('');
-    setTextCrawl('');
-    setdate('');
+    };
+    props.addMovie(movie);
+    setTitle("");
+    setTextCrawl("");
+    setdate("");
   };
 
   return (
