@@ -9,6 +9,7 @@ import CartProvider from "./Store/CartProvider";
 import About from "./Components/AboutPage/About";
 import HomePage from "./Components/HomePage/HomePage";
 import ContactUs from "./Components/ContactPage/ContactUs";
+import ProductDetails from "./Components/StorePage/ProductDetails";
 
 function App() {
   const [cartShow, setCartShow] = useState(false);
@@ -30,6 +31,7 @@ function App() {
       price: 100,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+        reviews: ["Review 1: Awesome. The singer and composer nailed it", "Review 2: Woowwwwwww"]
     },
     {
       id: "e2",
@@ -37,6 +39,7 @@ function App() {
       price: 50,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+      reviews: ["Review 1: Feel Good Music", "Review 2: Awesome product"],
     },
     {
       id: "e3",
@@ -44,6 +47,7 @@ function App() {
       price: 70,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+        reviews: ["Review 1: Not that good", "Review 2: Average"]
     },
     {
       id: "e4",
@@ -51,6 +55,7 @@ function App() {
       price: 100,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+        reviews: ["Review 1: Not that good", "Review 2: Average"]
     },
   ];
 
@@ -61,11 +66,14 @@ function App() {
         method: "POST",
         body: JSON.stringify(details),
         headers: {
-          "Content-Type": "application/json", // Fixed the header name
+          "Content-Type": "application/json",
         },
       }
     );
-    const data = await response.json(); // Parse the response
+    if (!response.ok) {
+      throw new Error("Failed to store customer details");
+    }
+    const data = await response.json();
     setDetails(data);
   }
 
@@ -90,9 +98,14 @@ function App() {
               onAddToCart={() => setCartItemCount((prevCount) => prevCount + 1)}
             />
           }
+          exact
         />
         <Route path="/about" element={<About />} />
-        <Route path="/contactUs" element={<ContactUs post={postHandler}/>} />
+        <Route path="/contactUs" element={<ContactUs post={postHandler} />} />
+        <Route
+          path="/store/:productId"
+          element={<ProductDetails products={productsArr} />}
+        />
       </Routes>
     </CartProvider>
   );

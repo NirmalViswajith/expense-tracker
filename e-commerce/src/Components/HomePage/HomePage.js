@@ -28,7 +28,7 @@ const HomePage = () => {
         <Col>{tours.place}</Col>
         <Col>{tours.description}</Col>
         <Col><Button disabled>BUY TICKETS</Button></Col>
-        <hr />
+        <hr className="my-2"/>
       </Row>
     </li>
   ))
