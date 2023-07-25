@@ -1,8 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import classes from './AuthForm.module.css';
 import { Button } from 'react-bootstrap';
+import AuthProvider from '../ContextStore/ContextProvider';
 
 const AuthForm = () => {
+  const ctx = useContext(AuthProvider);
   const enteredEmail = useRef();
   const enteredPassword = useRef();
 
@@ -40,12 +42,10 @@ const AuthForm = () => {
         setIsLoading(false);
         if (res.ok) {
           return res.json();
-        } else {
-          throw new Error('Authentication failed.'); 
-        }
+        } 
       })
       .then((data) => {
-        console.log('idToken (JWT):', data.idToken);
+        ctx.login(data.idToken);
       })
       .catch((error) => {
         alert(error.message); 
