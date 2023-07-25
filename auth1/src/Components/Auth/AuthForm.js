@@ -2,11 +2,13 @@ import { useState, useRef, useContext } from 'react';
 import classes from './AuthForm.module.css';
 import { Button } from 'react-bootstrap';
 import AuthProvider from '../ContextStore/ContextProvider';
+import { useNavigate} from 'react-router-dom';
 
 const AuthForm = () => {
   const ctx = useContext(AuthProvider);
   const enteredEmail = useRef();
   const enteredPassword = useRef();
+  const history = useNavigate();
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,6 +48,7 @@ const AuthForm = () => {
       })
       .then((data) => {
         ctx.login(data.idToken);
+        history('/');
       })
       .catch((error) => {
         alert(error.message); 
