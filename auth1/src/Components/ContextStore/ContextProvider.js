@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext({
   token: '',
@@ -8,6 +9,7 @@ const AuthContext = React.createContext({
 })
 
 export const AuthProvider = (props) => {
+  const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const userisLoggedIn = !!token;
   const loginHandler = (token) => {
@@ -15,6 +17,7 @@ export const AuthProvider = (props) => {
   };
   const logoutHandler = () => {
     setToken(null);
+    navigate('/auth');
   };
 
   const auth = {
