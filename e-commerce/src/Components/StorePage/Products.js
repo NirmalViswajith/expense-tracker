@@ -7,9 +7,6 @@ import './products.css';
 
 const Products = (props) => {
   const ctx = useContext(CartContext);
-  if (!props.productsArr || props.productsArr.length === 0) {
-    return <p>No products available.</p>;
-  }
 
   const music = props.productsArr.map((product) => (
     <div key={product.id} className="col-md-4 my-4">
@@ -33,7 +30,6 @@ const Products = (props) => {
           >
             Add Products
           </Button>
-          <Link to={`/store/${product.id}`}>View Details</Link>
         </Card.Body>
       </Card>
     </div>

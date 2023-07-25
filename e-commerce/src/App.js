@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import NavBar from "./Components/StorePage/NavBar";
 import Header from "./Components/StorePage/Header";
 import Products from "./Components/StorePage/Products";
@@ -15,6 +15,7 @@ function App() {
   const [cartShow, setCartShow] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [details, setDetails] = useState([]);
+  const navigate = useNavigate();
 
   const showCartHandler = () => {
     setCartShow(true);
@@ -31,7 +32,10 @@ function App() {
       price: 100,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-        reviews: ["Review 1: Awesome. The singer and composer nailed it", "Review 2: Woowwwwwww"]
+      reviews: [
+        "Review 1: Awesome. The singer and composer nailed it",
+        "Review 2: Woowwwwwww",
+      ],
     },
     {
       id: "e2",
@@ -47,7 +51,7 @@ function App() {
       price: 70,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-        reviews: ["Review 1: Not that good", "Review 2: Average"]
+      reviews: ["Review 1: Not that good", "Review 2: Average"],
     },
     {
       id: "e4",
@@ -55,10 +59,13 @@ function App() {
       price: 100,
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-        reviews: ["Review 1: Not that good", "Review 2: Average"]
+      reviews: ["Review 1: Not that good", "Review 2: Average"],
     },
   ];
 
+  if (window.location.pathname === "/") {
+    navigate("/home");
+  }
   async function postHandler(details) {
     const response = await fetch(
       "https://react-app-b039c-default-rtdb.firebaseio.com/customer_details.json",
