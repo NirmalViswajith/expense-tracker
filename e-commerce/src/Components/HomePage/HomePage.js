@@ -15,14 +15,14 @@ const HomePage = () => {
       description: 'BUDWEISER STAGE'
     },
     {
-      id: 'e1',
+      id: 'e3',
       date: "july 22",
       place: "Bristow, VA",
       description: 'JIGGY LUBE LIVE'
     },
   ];
   const tourList = tours.map((tours) => (
-    <li >
+    <li key={tours.id}>
       <Row >
         <Col>{tours.date}</Col>
         <Col>{tours.place}</Col>

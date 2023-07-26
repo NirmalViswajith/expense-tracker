@@ -10,11 +10,15 @@ import About from "./Components/AboutPage/About";
 import HomePage from "./Components/HomePage/HomePage";
 import ContactUs from "./Components/ContactPage/ContactUs";
 import ProductDetails from "./Components/StorePage/ProductDetails";
-
+import Login from "./Components/Auth/Login";
+import NewUser from "./Components/Auth/NewUser";
+import AuthProvider from "./TokenStore/AuthProvider";
 function App() {
   const [cartShow, setCartShow] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [details, setDetails] = useState([]);
+  const [existingUser, setExistingUser] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const showCartHandler = () => {
@@ -85,36 +89,48 @@ function App() {
   }
 
   return (
-    <CartProvider>
-      {cartShow && (
-        <Cart
-          products={productsArr}
-          onClose={hideCartHandler}
-          onRemoveCart={() => setCartItemCount((prevCount) => prevCount - 1)}
-        />
-      )}
-      <NavBar onOpen={showCartHandler} cartItemCount={cartItemCount} />
-      <Header />
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route
-          path="/store"
-          element={
-            <Products
-              productsArr={productsArr}
-              onAddToCart={() => setCartItemCount((prevCount) => prevCount + 1)}
-            />
-          }
-          exact
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="/contactUs" element={<ContactUs post={postHandler} />} />
-        <Route
-          path="/store/:productId"
-          element={<ProductDetails products={productsArr} />}
-        />
-      </Routes>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        {cartShow && (
+          <Cart
+            products={productsArr}
+            onClose={hideCartHandler}
+            onRemoveCart={() => setCartItemCount((prevCount) => prevCount - 1)}
+          />
+        )}
+        <NavBar onOpen={showCartHandler} cartItemCount={cartItemCount} />
+        <Header />
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+          <Route
+            path="/store"
+            element={
+              <Products
+                productsArr={productsArr}
+                onAddToCart={() =>
+                  setCartItemCount((prevCount) => prevCount + 1)
+                }
+              />
+            }
+            exact
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="/contactUs" element={<ContactUs post={postHandler} />} />
+          <Route
+            path="/store/:productId"
+            element={<ProductDetails products={productsArr} />}
+          />
+          <Route
+            path="/login"
+            element={<Login createAcc={setExistingUser} />}
+          />
+          <Route
+            path="/login/createAcc"
+            element={<NewUser exist={setExistingUser} />}
+          />
+        </Routes>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
