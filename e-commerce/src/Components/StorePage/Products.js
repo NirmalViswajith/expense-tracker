@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CartContext from "../../Store/CartContext";
 import './products.css';
+import AuthContext from "../../TokenStore/AuthContext";
 
 const Products = (props) => {
   const ctx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  if (!authCtx.isLoggedIn) {
+    navigate("/login"); 
+    return null; 
+  }
 
   const music = props.productsArr.map((product) => (
     <div key={product.id} className="col-md-4 my-4">
