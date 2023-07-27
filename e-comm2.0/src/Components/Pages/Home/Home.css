@@ -1,0 +1,76 @@
+.latestAlbum{
+    width: 100vw;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #777;
+}
+
+
+.album-para{
+    /* display: flex;
+    align-items: center; */
+}
+
+.album-para p{
+    display: inline-block;
+    border: 1px solid rgb(38, 228, 235);
+    padding: 6px 15px 6px 15px;
+    color: white;
+    font-size: 12px;
+}
+.main-playBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.play-button-outer {
+    width: 10px;
+    height: 10px;
+    background-color:transparent;
+    cursor: pointer;
+  }
+  
+  .play-button {
+    top: -40%;
+    /* left: -55%;  */
+    position: relative;  
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0.5em 0 0.5em 1em;
+    border-color: transparent transparent transparent rgb(38, 228, 235);
+    opacity: .75; 
+  }
+  
+  
+  
+  .play-button-outer:hover .play-button {
+    opacity: 1;
+  }
+
+  .playBtn{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border:  1px solid rgb(38, 228, 235);
+    padding: 10px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.tours{
+    font-size: 40px;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-left: 46vw;
+}

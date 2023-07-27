@@ -1,0 +1,17 @@
+
+.contact-container{
+    width: 60vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.contact-sub{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0.5px solid #777;
+    padding: 10px;
+    border-radius: 5px;
+}

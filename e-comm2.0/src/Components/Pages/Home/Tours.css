@@ -1,0 +1,33 @@
+.main-div{
+    width: 80vw;
+    height: auto;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.tours-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10%;
+
+}
+.line-main{
+     
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line{
+    width: 80vw;
+    height: 1px;
+    background: #000;
+    justify-content: center;
+    margin-bottom: 8px;
+}

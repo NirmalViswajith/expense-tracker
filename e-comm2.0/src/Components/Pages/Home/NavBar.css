@@ -1,0 +1,45 @@
+
+.nav-main-div{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: #000;
+    padding: 10px;
+    position: fixed;
+    z-index: 5;
+}
+
+.nav-sub-div{
+    width: 80%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: relative;
+/* position: static; */
+}
+.nav-sub-com{
+    text-decoration: none;
+    color: white;
+}
+
+.login-btn{
+    padding: 5px;
+}
+.cart-btn{
+    padding: 5px;
+}
+.cart-item-no{
+    position: absolute;
+    color: white;
+    padding: 2px;
+    background-color: cornflowerblue;
+    border-radius: 100%;
+    right: -24px;
+
+}
+.active{
+    color: #777;
+}
