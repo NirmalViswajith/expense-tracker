@@ -7,7 +7,7 @@ const defaultState={
     totalAmount:0
 }
 
-const url="https://crudcrud.com/api/059cd864d88c40729ed269a65d9bbf9e";
+const url="https://crudcrud.com/api/dd7729a036ae426da2299440aab60b88";
 
 
   const saveToCrud=async (title,price,img,id)=>{

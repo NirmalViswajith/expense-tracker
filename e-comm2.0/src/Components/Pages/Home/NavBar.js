@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Cart from '../../Cart/Cart';
 import cartContext from '../../Conrext-store/CartContext';
@@ -15,78 +15,73 @@ const NavBar = () => {
 
   return (
     <Fragment>
-      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-        <div className='container'>
-          <NavLink className='navbar-brand' to='/'>
-            Your Logo
-          </NavLink>
-          <button
-            className='navbar-toggler'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarNav'
-            aria-controls='navbarNav'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='navbar-toggler-icon'></span>
-          </button>
-          <div className='collapse navbar-collapse' id='navbarNav'>
-            <ul className='navbar-nav'>
-              <li className='nav-item'>
-                <NavLink className='nav-link' exact to='/'>
-                  Home
+      <div className="nav-main-div bg-gray-800 py-4">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <div className="flex space-x-4">
+              <NavLink
+                exact
+                to="/"
+                className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                activeClassName="bg-gray-900"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/store"
+                className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                activeClassName="bg-gray-900"
+              >
+                Store
+              </NavLink>
+              <NavLink
+                to="/about"
+                className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                activeClassName="bg-gray-900"
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                activeClassName="bg-gray-900"
+              >
+                Contact
+              </NavLink>
+            </div>
+            <div className="flex space-x-4 items-center">
+              {!ctx.isLoggedIn && (
+                <NavLink
+                  to="/login"
+                  className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                  activeClassName="bg-gray-900"
+                >
+                  <button type="button" className="btn btn-primary login-btn">
+                    Login
+                  </button>
                 </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to='/store'>
-                  Store
+              )}
+              {ctx.isLoggedIn && (
+                <NavLink
+                  to="/login"
+                  className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                  activeClassName="bg-gray-900"
+                >
+                  <button
+                    type="button"
+                    className="btn btn-primary login-btn"
+                    onClick={logoutHandler}
+                  >
+                    Logout
+                  </button>
                 </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to='/about'>
-                  About
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to='/contact'>
-                  Contact
-                </NavLink>
-              </li>
-            </ul>
-            {!ctx.isLoggedIn && (
-              <ul className='navbar-nav ms-auto'>
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to='/login'>
-                    <button type='button' className='btn btn-primary'>
-                      Login
-                    </button>
-                  </NavLink>
-                </li>
-              </ul>
-            )}
-            {ctx.isLoggedIn && (
-              <ul className='navbar-nav ms-auto'>
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to='/login'>
-                    <button
-                      type='button'
-                      className='btn btn-outline-primary'
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </button>
-                  </NavLink>
-                </li>
-              </ul>
-            )}
-            <Cart />
-            <div className='navbar-nav ms-2'>
-              <p className='cart-item-no'>{NoItem}</p>
+              )}
+              {ctx.isLoggedIn && <Cart />}
+              <p className="cart-item-no">{NoItem}</p>
             </div>
           </div>
         </div>
-      </nav>
+      </div>
     </Fragment>
   );
 };
