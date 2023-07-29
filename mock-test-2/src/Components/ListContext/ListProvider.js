@@ -1,23 +1,8 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListContext from "./ListContext";
 
-const url = "https://crudcrud.com/api/3120e694b19943f2a9416344958d64da";
+const url = "https://crudcrud.com/api/67e700b9bbb34a4091408f4a4bc971cb";
 
-const medicineProvider = (state, action) => {
-  if (action.type === "ADD_ITEM") {
-    const existingItemIndex = state.medicineItem.findIndex(
-      (item) => item.name === action.medicineItem.name
-    );
-    if (existingItemIndex === -1) {
-      const updatedItems = [...state.medicineItem, action.medicineItem];
-      return {
-        ...state,
-        medicineItem: updatedItems,
-      };
-    }
-  }
-  return state;
-};
 
 const addToCrudCrud = async (name, description, price, quantity) => {
   try {
@@ -67,13 +52,12 @@ const toGetFromCrudCrud = async () => {
 };
 
 const ListProvider = (props) => {
-  const [items, dispatchItems] = useReducer(medicineProvider, {
-    medicineItem: [],
-  });
-  const [isLoading, setIsLoading] = useState(true); // Introduce a loading state
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]); 
 
   const addMedicineHandler = async (medicine) => {
-    dispatchItems({ type: "ADD_ITEM", medicineItem: medicine });
+    
+    setProducts((prev) => [...prev, medicine]);
     await addToCrudCrud(
       medicine.name,
       medicine.description,
@@ -85,18 +69,17 @@ const ListProvider = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await toGetFromCrudCrud();
-      dispatchItems({ type: "ADD_ITEM", medicineItem: data });
-      setIsLoading(false); // Set loading state to false after data is fetched
+      setProducts(data);
+      setIsLoading(false); 
     };
     fetchData();
-  }, []);
+  }, []); 
 
   const listContextValue = {
-    medicineList: items.medicineItem,
+    medicineList: products,
     addMedicine: addMedicineHandler,
   };
 
-  // Only render props.children when loading is false
   return (
     <ListContext.Provider value={listContextValue}>
       {!isLoading && props.children}
