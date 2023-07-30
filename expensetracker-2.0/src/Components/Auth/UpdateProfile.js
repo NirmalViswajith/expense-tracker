@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -33,6 +33,28 @@ const UpdateProfile = () => {
     setName('');
     setImg('');
   }
+
+  useEffect(() => {
+    fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w', {
+      method: 'POST',
+      body: JSON.stringify({
+        idToken: localStorage.getItem('token')
+      }), 
+      headers: {
+        'Content-type' : 'application/json'
+      }
+    }).then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+    }).then((data) => {
+      setName(data.users[0].displayName);
+      setImg(data.users[0].photoUrl);
+    }).catch(err => {
+      console.log(err);
+    })
+  }, [])
+
   return (
     <div>
       <div>
