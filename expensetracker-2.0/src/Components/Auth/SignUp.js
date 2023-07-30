@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Form, Container, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Container, Button } from "react-bootstrap";
 
 const SignUp = () => {
-  const [mail, setMail] = useState('');
+  const [mail, setMail] = useState("");
   const mailHandler = (event) => {
     setMail(event.target.value);
   };
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const passwordHandler = (event) => {
     setPassword(event.target.value);
   };
@@ -17,59 +17,77 @@ const SignUp = () => {
     setIsPasswordVisible((prev) => !prev);
   };
 
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
   const passwordConfirmHandler = (event) => {
     setConfirmPassword(event.target.value);
   };
 
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
   const toggleConfirmPasswordVisibility = () => {
     setIsConfirmPasswordVisible((prev) => !prev);
   };
 
   const isPasswordMatch = password === confirmPassword;
 
+  const isFormFilled = mail.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "";
+
+
   const submitHandler = (event) => {
     event.preventDefault();
     const details = {
       email: mail,
-      password: password
-    }
-    fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w', {
-      method: 'POST',
-      body: JSON.stringify({
-        ...details,
-        returnSecureToken: true
-      }),
-      headers: {
-        'Content-type': 'application/json'
+      password: password,
+    };
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          ...details,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
       }
-    }).then((res) => {
-      if(res.ok){
-        return res.json();
-      } else {
-        throw new Error('Authentication Failed');
-      }
-    }).then((data) => console.log(data)).catch((error) => alert(error));
-    setMail('');
-    setPassword('');
-    setConfirmPassword('');
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Authentication Failed");
+        }
+      })
+      .then((data) => console.log(data))
+      .catch((error) => alert(error));
+    setMail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
-    <Container className='border rounded shadow mt-5 p-4 bg-light' style={{ maxWidth: '600px' }}>
-      <div className='d-flex justify-content-center my-2 '>
+    <Container
+      className="border rounded shadow mt-5 p-4 bg-light"
+      style={{ maxWidth: '600px', background: '#f9f9f9' }}
+    >
+      <div className="d-flex justify-content-center my-2 ">
         <h2>Sign Up</h2>
       </div>
       <Form onSubmit={submitHandler}>
-        <Form.Group className='form-floating mb-2'>
-          <Form.Control type='email' placeholder='Enter E-mail' value={mail} onChange={mailHandler} />
+        <Form.Group className="form-floating mb-2 shadow">
+          <Form.Control
+            type="email"
+            placeholder="Enter E-mail"
+            value={mail}
+            onChange={mailHandler}
+          />
           <Form.Label>Email</Form.Label>
         </Form.Group>
-        <Form.Group className='form-floating mb-2'>
+        <Form.Group className="form-floating mb-2 shadow">
           <Form.Control
-            type={isPasswordVisible ? 'text' : 'password'}
-            placeholder='Enter Password'
+            type={isPasswordVisible ? "text" : "password"}
+            placeholder="Enter Password"
             value={password}
             onChange={passwordHandler}
             onFocus={togglePasswordVisibility}
@@ -77,10 +95,10 @@ const SignUp = () => {
           />
           <Form.Label>Password</Form.Label>
         </Form.Group>
-        <Form.Group className='form-floating mb-2'>
+        <Form.Group className="form-floating mb-2 shadow">
           <Form.Control
-            type={isConfirmPasswordVisible ? 'text' : 'password'}
-            placeholder='Confirm Password'
+            type={isConfirmPasswordVisible ? "text" : "password"}
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={passwordConfirmHandler}
             onFocus={toggleConfirmPasswordVisibility}
@@ -88,8 +106,12 @@ const SignUp = () => {
           />
           <Form.Label>Confirm Password</Form.Label>
         </Form.Group>
-        <div className='d-flex justify-content-center'>
-          <Button type='submit' disabled={!isPasswordMatch}>
+        <div className="d-flex justify-content-center mt-3">
+          <Button
+            type="submit"
+            disabled={!isPasswordMatch || !isFormFilled}
+            className="btn-success shadow"
+          >
             Sign Up
           </Button>
         </div>
