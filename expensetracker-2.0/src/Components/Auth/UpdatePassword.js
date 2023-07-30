@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 const UpdatePassword = () => {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -23,7 +23,7 @@ const UpdatePassword = () => {
     navigate('/login');
   }
   return(
-    <Container className="border rounded p-2 mt-5 shadow">
+    <Container className="border rounded p-2 mt-5 shadow" style={{maxWidth:'600px'}}>
       <Form onSubmit={submitHandler}>
         <Form.Group className="form-floating">
           <Form.Control type="email" placeholder="" value={email} onChange={(event) => setEmail(event.target.value)}></Form.Control> 
