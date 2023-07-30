@@ -115,12 +115,21 @@ const Login = (props) => {
         </div>
         <div className="d-flex justify-content-center mt-3">
           <Link
+            to="/updatePassword"
+            className="text-decoration-none text-gray-500 hover:text-gray-900"
+          >
+            Forgot Password?
+          </Link>
+        </div>
+        <div className="d-flex justify-content-center mt-3">
+          <Link
             to="/signup"
             className="text-decoration-none text-gray-500 hover:text-gray-900"
           >
             Don't have an account? Create one!
           </Link>
         </div>
+        
       </Form>
     </Container>
   );

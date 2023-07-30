@@ -6,6 +6,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Home from './Components/Pages/Home';
 import UpdateProfile from './Components/Auth/UpdateProfile';
+import UpdatePassword from './Components/Auth/UpdatePassword';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<Login login={loginHandler} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/updateprofile" element={<UpdateProfile />} />
+        <Route path='/updatePassword' element={<UpdatePassword />} />
       </Routes>
     </div>
   );
