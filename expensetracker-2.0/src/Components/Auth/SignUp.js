@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const mailHandler = (event) => {
     setMail(event.target.value);
@@ -30,8 +32,10 @@ const SignUp = () => {
 
   const isPasswordMatch = password === confirmPassword;
 
-  const isFormFilled = mail.trim() !== "" && password.trim() !== "" && confirmPassword.trim() !== "";
-
+  const isFormFilled =
+    mail.trim() !== "" &&
+    password.trim() !== "" &&
+    confirmPassword.trim() !== "";
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -54,6 +58,7 @@ const SignUp = () => {
     )
       .then((res) => {
         if (res.ok) {
+          navigate('/login')
           return res.json();
         } else {
           throw new Error("Authentication Failed");
@@ -68,8 +73,8 @@ const SignUp = () => {
 
   return (
     <Container
-      className="border rounded shadow mt-5 p-4 bg-light"
-      style={{ maxWidth: '600px', background: '#f9f9f9' }}
+      className="border rounded shadow mt-5 bg-light"
+      style={{ maxWidth: "550px", padding:'20px' }}
     >
       <div className="d-flex justify-content-center my-2 ">
         <h2>Sign Up</h2>
@@ -114,6 +119,11 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
+        </div>
+        <div className="d-flex justify-content-center mt-3">
+          <Link to="/login" className="text-decoration-none text-gray-500 hover:text-gray-900">
+            Have an account? Login
+          </Link>
         </div>
       </Form>
     </Container>
