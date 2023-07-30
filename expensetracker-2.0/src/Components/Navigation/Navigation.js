@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
   return (
-    <div>
-      <Container className=" border-b-2 shadow">
+    <div className=" border-b-2 shadow">
+      <Container>
         <Navbar>
           <Navbar.Brand>Expense Tracker</Navbar.Brand>
           <Nav>
