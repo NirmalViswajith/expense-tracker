@@ -7,76 +7,125 @@ const ExpenseForm = () => {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [expenses, setExpenses] = useState([]);
+  const [editingItem, setEditingItem] = useState(null);
 
   const url = "https://expense-tracker-9e669-default-rtdb.firebaseio.com";
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const expenses = {
+    const newExpense = {
       description: description,
       amount: amount,
       category: category,
     };
-    console.log(expenses);
-    const email = localStorage.getItem("email");
-    const encodedEmail = encodeURIComponent(email);
-    console.log(encodedEmail);
     try {
-      await fetch(`${url}/expenses.json`, {
+      const response = await fetch(`${url}/expenses.json`, {
         method: "POST",
-        body: JSON.stringify(expenses),
+        body: JSON.stringify(newExpense),
         headers: {
           "Content-type": "application/json",
         },
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
       });
+      if (response.ok) {
+        const data = await response.json();
+        setExpenses((prev) => [...prev, { id: data.name, ...newExpense }]);
+        setDescription("");
+        setAmount("");
+        setCategory("");
+      }
     } catch (error) {
       console.error("Error uploading data:", error);
       alert("Failed to upload. Please check the console for more information.");
     }
-    setExpenses((prev) => [...prev, expenses]);
-    setDescription("");
-    setAmount("");
-    setCategory("");
+  };
+
+  const updateItem = async () => {
+    const editedExpense = {
+      id: editingItem.id,
+      description: description,
+      amount: amount,
+      category: category,
+    };
+
+    try {
+      const response = await fetch(`${url}/expenses/${editingItem.id}.json`, {
+        method: "PUT",
+        body: JSON.stringify(editedExpense),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setExpenses((prevExpenses) =>
+          prevExpenses.map((expense) =>
+            expense.id === editedExpense.id ? editedExpense : expense
+          )
+        );
+        setDescription("");
+        setAmount("");
+        setCategory("");
+        setEditingItem(null);
+      }
+    } catch (error) {
+      console.error("Error updating data:", error);
+      alert("Failed to update. Please check the console for more information.");
+    }
+  };
+
+  const deleteItem = async (id) => {
+    try {
+      const response = await fetch(`${url}/expenses/${id}.json`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setExpenses((prevExpenses) =>
+          prevExpenses.filter((expense) => expense.id !== id)
+        );
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
   useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = async () => {
       try {
-         const res = await fetch(`${url}/expenses.json`, {
-          method: 'GET',
+        const res = await fetch(`${url}/expenses.json`, {
+          method: "GET",
           headers: {
-            'Content-type' : 'application/json'
-          }
+            "Content-type": "application/json",
+          },
         });
 
-        if(res.ok) {
+        if (res.ok) {
           const data = await res.json();
           const newItem = [];
-          for(let key in data) {
+          for (let key in data) {
             newItem.push({
               id: key,
-              ...data[key]
+              ...data[key],
             });
           }
-          setExpenses(newItem)
+          setExpenses(newItem);
         }
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     fetchData();
-  }, []) 
+  }, []);
+
+  const editItem = (item) => {
+    setEditingItem(item);
+    setDescription(item.description);
+    setAmount(item.amount);
+    setCategory(item.category);
+  };
 
   return (
     <div>
-      <Container
-        className="border rounded p-2 shadow mt-5"
-        style={{ maxWidth: "600px" }}
-      >
+      <Container className="border rounded p-2 shadow mt-5" style={{ maxWidth: "600px" }}>
         <div className="d-flex justify-content-center">
           <h1 className="text-3xl">Daily Expenses</h1>
         </div>
@@ -84,20 +133,18 @@ const ExpenseForm = () => {
           <Form.Group className="form-floating my-2">
             <Form.Control
               type="text"
-              placeholder=""
               value={description}
               onChange={(event) => setDescription(event.target.value)}
-            ></Form.Control>
+            />
             <Form.Label>Description</Form.Label>
           </Form.Group>
 
           <Form.Group className="form-floating my-2">
             <Form.Control
               type="number"
-              placeholder=""
               value={amount}
               onChange={(event) => setAmount(event.target.value)}
-            ></Form.Control>
+            />
             <Form.Label>Amount Spent</Form.Label>
           </Form.Group>
 
@@ -119,15 +166,18 @@ const ExpenseForm = () => {
             <Form.Label>Category</Form.Label>
           </Form.Group>
           <div className="d-flex justify-content-center mt-3">
-            <Button type="submit">Add Expense</Button>
+            {editingItem ? (
+              <Button type="button" onClick={updateItem}>
+                Update Expense
+              </Button>
+            ) : (
+              <Button type="submit">Add Expense</Button>
+            )}
           </div>
         </Form>
       </Container>
-      <Container
-        className="border rounded p-2 shadow mt-5"
-        style={{ maxWidth: "600px" }}
-      >
-        <ExpenseList items={expenses} />
+      <Container className="border rounded p-2 shadow mt-5" style={{ maxWidth: "600px" }}>
+        <ExpenseList items={expenses} delete={deleteItem} edit={editItem} />
       </Container>
     </div>
   );
