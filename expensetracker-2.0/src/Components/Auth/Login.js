@@ -44,7 +44,10 @@ const Login = (props) => {
       } else {
         throw new Error('Login Failed')
       }
-    }).then(data => localStorage.setItem('token', data.idToken)).catch((error) => alert(error));
+    }).then(data => {
+      localStorage.setItem('token', data.idToken);
+      localStorage.setItem('email', data.email);
+    }).catch((error) => alert(error));
     setMail("");
     setPassword("");
   };

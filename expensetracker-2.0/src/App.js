@@ -25,6 +25,7 @@ function App() {
 
   const logoutHandler = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     setIsLogged(false);
     // navigate('/login'); // Redirect to the login page after logout
   };
