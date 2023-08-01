@@ -8,13 +8,14 @@ const ExpenseList = (props) => {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Expense List</h2>
       <div className="overflow-x-auto">
-        <table className="table table-bordered table-hover border">
+        <table className="table table-fixed table-hover border" style={{maxWidth:'650px'}}>
           <thead>
             <tr>
               <th className="px-4 py-2">Description</th>
               <th className="px-4 py-2">Amount</th>
               <th className="px-4 py-2">Category</th>
-              <th className="px-4 py-2">Buttons</th>
+              <th className="px-4 py-2">Edit</th>
+              <th className="px-4 py-2">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -31,6 +32,8 @@ const ExpenseList = (props) => {
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Button>
+                </td>
+                <td>
                   <Button
                     variant="outline-dark"
                     onClick={() => props.delete(expense.id)}
