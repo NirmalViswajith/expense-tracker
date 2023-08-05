@@ -78,9 +78,10 @@ const Login = (props) => {
         <Form.Group className="form-floating mt-2 position-relative">
           <Form.Control
             type={!isText ? "password" : "text"}
-            placeholder=""
+            placeholder="password"
             value={password}
             onChange={passwordHandler}
+            
           />
           <Form.Label>Password</Form.Label>
           {isText ? (
@@ -88,6 +89,7 @@ const Login = (props) => {
               icon={faEye}
               onClick={togglePasswordVisibility}
               style={{
+                color: 'black',
                 position: "absolute",
                 top: "50%",
                 right: "10px",
@@ -100,6 +102,7 @@ const Login = (props) => {
               icon={faEyeSlash}
               onClick={togglePasswordVisibility}
               style={{
+                color: 'black',
                 position: "absolute",
                 top: "50%",
                 right: "10px",
