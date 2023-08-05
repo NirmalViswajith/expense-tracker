@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { Navbar, Nav, NavLink, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { authAction } from "../Store/Store";
 
 const Navigation = (props) => {
   const [isEmailVerificationSent, setIsEmailVerificationSent] = useState(false);
   const [verificationError, setVerificationError] = useState("");
   const navigate = useNavigate();
+  const login = useSelector(state => state.authReducer.isAuthenticated);
+  const dispatch = useDispatch();
   const verify = () => {
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w",
@@ -38,8 +43,7 @@ const Navigation = (props) => {
   };
 
   const logoutHandler = () => {
-    props.login(false);
-    props.logout();
+    dispatch(authAction.logout());
     props.navigate("/login");
   };
 
@@ -49,19 +53,19 @@ const Navigation = (props) => {
         <Navbar>
           <Navbar.Brand>Expense Tracker</Navbar.Brand>
           <Nav className="mr-auto">
-            {props.isLogged && (
+            {login && (
               <Link to="/home" className="nav-link">
                 Home
               </Link>
             )}
           </Nav>
           <Nav>
-            {props.isLogged && !isEmailVerificationSent && (
+            {login && !isEmailVerificationSent && (
               <Button variant="outline-success me-2" onClick={verify}>
                 Verify Email
               </Button>
             )}
-            {!props.isLogged ? (
+            {!login ? (
               <Link
                 to="/login"
                 className="nav-link text-decoration-none text-orange-700 hover:text-orange-900"

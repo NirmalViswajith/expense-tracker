@@ -3,9 +3,12 @@ import { Form, Button, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authAction } from "../Store/Store";
 
 const Login = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isText, setText] = useState(false);
   const [mail, setMail] = useState("");
   const mailHandler = (event) => {
@@ -37,7 +40,7 @@ const Login = (props) => {
       }
     }).then((res) => {
       if(res.ok){
-        props.login(true);
+        dispatch(authAction.login);
         navigate('/home');
 
         return res.json();

@@ -8,6 +8,7 @@ import Home from './Components/Pages/Home';
 import UpdateProfile from './Components/Auth/UpdateProfile';
 import UpdatePassword from './Components/Auth/UpdatePassword';
 
+
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const navigate = useNavigate();
