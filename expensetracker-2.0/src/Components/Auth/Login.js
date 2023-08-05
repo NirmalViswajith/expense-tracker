@@ -57,7 +57,8 @@ const Login = (props) => {
   const isFilled = mail.trim() !== "" && password.trim() !== "";
 
   return (
-    <Container
+    <div>
+          <Container
       className="border rounded shadow mt-5 bg-light"
       style={{ maxWidth: "550px", padding: "20px" }}
     >
@@ -137,6 +138,7 @@ const Login = (props) => {
         
       </Form>
     </Container>
+    </div>
   );
 };
 

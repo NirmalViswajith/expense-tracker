@@ -18,8 +18,10 @@ const Navigation = (props) => {
     if(email && token){
       dispatch(authAction.login());
     }
+    toggleTheme();
   },[])
   const toggleTheme = () => {
+  
     dispatch(themeAction.toggletheme());
   };
 
@@ -77,23 +79,23 @@ const Navigation = (props) => {
                 Verify Email
               </Button>
             )}
-            {!login ? (
-              <Link
-                to="/login"
-                className="nav-link text-decoration-none text-orange-700 hover:text-orange-900"
-              >
-                Login
-              </Link>
-            ) : (
-              <div className="d-flex align-items-center">
-                <Button variant="none" onClick={toggleTheme}>
-                  Toggle Theme
-                </Button>
-                <Button variant="none" onClick={logoutHandler}>
-                  Logout
-                </Button>
-              </div>
-            )}
+           {!login ? (
+            <Link
+              to="/login"
+              className={`nav-link text-decoration-none ${isDarkTheme ? 'text-light' : 'text-orange-700 hover:text-orange-900'}`}
+            >
+              Login
+            </Link>
+          ) : (
+            <div className="d-flex align-items-center">
+              <Button variant="none" onClick={toggleTheme} className={`${isDarkTheme ? 'text-light' : ''}`}>
+                Toggle Theme
+              </Button>
+              <Button variant="none" onClick={logoutHandler} className={`${isDarkTheme ? 'text-light' : ''}`}>
+                Logout
+              </Button>
+            </div>
+          )}
           </Nav>
         </Navbar>
         {isEmailVerificationSent && (

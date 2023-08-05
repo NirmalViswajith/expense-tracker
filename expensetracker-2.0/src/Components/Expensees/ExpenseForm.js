@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import ExpenseList from "./ExpenseList";
 import {useDispatch} from 'react-redux';
-import { authAction, expenseReducer } from "../Store/Store";
+import { authAction, expenseAction } from "../Store/Store";
 
 const ExpenseForm = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const ExpenseForm = () => {
       if (response.ok) {
         const data = await response.json();
         setExpenses((prev) => [...prev, { id: data.name, ...newExpense }]);
-        dispatch(expenseReducer.addExpense(newExpense))
+        dispatch(expenseAction.addExpense(newExpense))
         setDescription("");
         setAmount("");
         setCategory("");
@@ -66,7 +66,7 @@ const ExpenseForm = () => {
             expense.id === editedExpense.id ? editedExpense : expense
           )
         );
-        dispatch(expenseReducer.editItem(editedExpense));
+        dispatch(expenseAction.editExpense(editedExpense));
         setDescription("");
         setAmount("");
         setCategory("");
@@ -87,7 +87,7 @@ const ExpenseForm = () => {
         setExpenses((prevExpenses) =>
           prevExpenses.filter((expense) => expense.id !== id)
         );
-        dispatch(expenseReducer.deleteExpense(id));
+        dispatch(expenseAction.deleteExpense(id));
       }
     } catch (error) {
       alert(error);

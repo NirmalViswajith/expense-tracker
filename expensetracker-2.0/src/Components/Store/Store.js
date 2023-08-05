@@ -1,22 +1,25 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const theme = {
-  isDark: false,
-};
+// Retrieve theme preference from local storage, default to light mode
+const savedTheme = localStorage.getItem('theme');
+const initialTheme = savedTheme ? savedTheme === 'dark' : false;
 
 const themeSlice = createSlice({
   name: 'Theme',
-  initialState: theme,
+  initialState: { isDark: initialTheme },
   reducers: {
     toggletheme(state) {
-      state.isDark = !state.isDark;
+      const newTheme = !state.isDark;
+      localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+      state.isDark = newTheme;
     },
   },
 });
 
 const isLogged = {
-  isAuthenticated: false
-}
+  isAuthenticated: false,
+};
+
 const Authslice = createSlice({
   name: 'Authentication',
   initialState: isLogged,
@@ -28,44 +31,44 @@ const Authslice = createSlice({
       localStorage.removeItem('token');
       localStorage.removeItem('email');
       state.isAuthenticated = false;
-    }
-  }
+    },
+  },
 });
 
 const expenseItems = {
-  items: []
-}
+  items: [],
+};
 
 const ExpenseSlice = createSlice({
-  name:'ExpenseItems',
+  name: 'ExpenseItems',
   initialState: expenseItems,
   reducers: {
-    addExpense(state, action){
+    addExpense(state, action) {
       state.items.push(action.payload);
     },
-    editExpense(state, action){
+    editExpense(state, action) {
       const edited = action.payload;
-      const index = state.items.findIndex((expense) => expense.id === edited);
-      if(index !== -1){
-        state.items[index] = edited
+      const index = state.items.findIndex((expense) => expense.id === edited.id);
+      if (index !== -1) {
+        state.items[index] = edited;
       }
     },
-    deleteExpense(state,action){
+    deleteExpense(state, action) {
       state.items = state.items.filter((expense) => expense.id !== action.payload);
-    }
-  }
-})
+    },
+  },
+});
 
-export const expenseReducer = ExpenseSlice.reducer;
+export const expenseAction = ExpenseSlice.actions;
 export const authAction = Authslice.actions;
 export const themeAction = themeSlice.actions;
 
 const store = configureStore({
   reducer: {
     authReducer: Authslice.reducer,
-    expenseReducer: expenseReducer,
-    themeReducer: themeSlice.reducer
-  } 
+    expenseReducer: ExpenseSlice.reducer,
+    themeReducer: themeSlice.reducer,
+  },
 });
 
 export default store;

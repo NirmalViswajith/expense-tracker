@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const ExpenseList = (props) => {
   const [isPremium, setPremium] = useState(false);
