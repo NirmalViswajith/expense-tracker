@@ -40,9 +40,8 @@ const Login = (props) => {
       }
     }).then((res) => {
       if(res.ok){
-        dispatch(authAction.login);
+        dispatch(authAction.login());
         navigate('/home');
-
         return res.json();
       } else {
         throw new Error('Login Failed')

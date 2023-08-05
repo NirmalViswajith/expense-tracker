@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Nav, NavLink, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch } from "react-redux";
-import { authAction } from "../Store/Store";
+import { useSelector, useDispatch } from "react-redux";
+import { authAction, themeAction } from "../Store/Store";
 
 const Navigation = (props) => {
   const [isEmailVerificationSent, setIsEmailVerificationSent] = useState(false);
   const [verificationError, setVerificationError] = useState("");
   const navigate = useNavigate();
-  const login = useSelector(state => state.authReducer.isAuthenticated);
   const dispatch = useDispatch();
+  const login = useSelector(state => state.authReducer.isAuthenticated);
+  const isDarkTheme = useSelector(state => state.themeReducer.isDark);
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    const token = localStorage.getItem('token');
+    if(email && token){
+      dispatch(authAction.login());
+    }
+  },[])
+  const toggleTheme = () => {
+    dispatch(themeAction.toggletheme());
+  };
+
   const verify = () => {
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w",
@@ -44,20 +56,20 @@ const Navigation = (props) => {
 
   const logoutHandler = () => {
     dispatch(authAction.logout());
-    props.navigate("/login");
+    navigate("/login");
   };
 
   return (
-    <div className="border-b-2 shadow">
+    <div className={`border-b-2 shadow ${isDarkTheme ? 'bg-dark text-light' : ''}`}>
       <Container>
         <Navbar>
-          <Navbar.Brand>Expense Tracker</Navbar.Brand>
+          <Navbar.Brand className={`${isDarkTheme ? 'text-light' : ''}`}>Expense Tracker</Navbar.Brand>
           <Nav className="mr-auto">
-            {login && (
-              <Link to="/home" className="nav-link">
-                Home
-              </Link>
-            )}
+          {login && (
+  <Link to="/home" className={`nav-link ${isDarkTheme ? 'text-light' : ''}`}>
+    Home
+  </Link>
+)}
           </Nav>
           <Nav>
             {login && !isEmailVerificationSent && (
@@ -73,23 +85,25 @@ const Navigation = (props) => {
                 Login
               </Link>
             ) : (
-              <Button
-                variant="none"
-                onClick={logoutHandler}
-              >
-                Logout
-              </Button>
+              <div className="d-flex align-items-center">
+                <Button variant="none" onClick={toggleTheme}>
+                  Toggle Theme
+                </Button>
+                <Button variant="none" onClick={logoutHandler}>
+                  Logout
+                </Button>
+              </div>
             )}
           </Nav>
-          {isEmailVerificationSent && (
-            <div className="text-success">
-              Verification email sent! Check your email to verify.
-            </div>
-          )}
-          {verificationError && (
-            <div className="text-danger">Error: {verificationError}</div>
-          )}
         </Navbar>
+        {isEmailVerificationSent && (
+          <div className="text-success">
+            Verification email sent! Check your email to verify.
+          </div>
+        )}
+        {verificationError && (
+          <div className="text-danger">Error: {verificationError}</div>
+        )}
       </Container>
     </div>
   );

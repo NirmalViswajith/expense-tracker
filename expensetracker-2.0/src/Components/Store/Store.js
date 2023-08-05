@@ -1,5 +1,19 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
+const theme = {
+  isDark: false,
+};
+
+const themeSlice = createSlice({
+  name: 'Theme',
+  initialState: theme,
+  reducers: {
+    toggletheme(state) {
+      state.isDark = !state.isDark;
+    },
+  },
+});
+
 const isLogged = {
   isAuthenticated: false
 }
@@ -42,13 +56,15 @@ const ExpenseSlice = createSlice({
   }
 })
 
-export const expenseReducer = ExpenseSlice.actions;
+export const expenseReducer = ExpenseSlice.reducer;
 export const authAction = Authslice.actions;
+export const themeAction = themeSlice.actions;
 
 const store = configureStore({
   reducer: {
     authReducer: Authslice.reducer,
-    expenseReducer: ExpenseSlice.reducer
+    expenseReducer: expenseReducer,
+    themeReducer: themeSlice.reducer
   } 
 });
 

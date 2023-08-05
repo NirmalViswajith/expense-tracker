@@ -19,6 +19,18 @@ const ExpenseList = (props) => {
   }, [totalAmount])
 
 
+  const downloadCSV = () => {
+    const csvData = props.items.map((expense) => {
+      return `${expense.description},${expense.amount},${expense.category}`;
+    }).join("\n");
+
+    const blob = new Blob([csvData], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "expenses.csv";
+    link.click();
+  };
 
   return (
     <div className="p-4">
@@ -67,6 +79,11 @@ const ExpenseList = (props) => {
             <Button className="ml-2">Premium</Button>
           )}
         </div>
+        <div className="d-flex justify-content-end mt-4 mr-3">
+        <Button className="ml-2" onClick={downloadCSV}>
+         Download
+        </Button>
+      </div>
       </div>
     </div>
   );
