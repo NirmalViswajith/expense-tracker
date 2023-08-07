@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import { authAction, expenseAction } from "../Store/Store";
 
 const ExpenseForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 const ExpenseList = (props) => {
   const [isPremium, setPremium] = useState(false);
@@ -10,6 +10,9 @@ const ExpenseList = (props) => {
     return curr + +expense.amount;
   }, 0);
 
+  const cancelHandler = (event) => {
+    setPremium(false);
+  }
   useEffect(() => {
     if (totalAmount > 10000) {
       setPremium(true);
@@ -76,14 +79,17 @@ const ExpenseList = (props) => {
         <div className="d-flex justify-content-end mt-4 mr-3">
           <strong>Total Amount: {totalAmount}</strong>
           {isPremium && (
-            <Button className="ml-2">Premium</Button>
+            <div>
+              <Button className="ml-2">Premium</Button>
+              <Button className="ml-2" onClick={cancelHandler}>cancel</Button>
+            </div>
           )}
         </div>
         <div className="d-flex justify-content-end mt-4 mr-3">
-        <Button className="ml-2" onClick={downloadCSV}>
-         Download
-        </Button>
-      </div>
+          <Button className="ml-2" onClick={downloadCSV}>
+            Download
+          </Button>
+        </div>
       </div>
     </div>
   );
