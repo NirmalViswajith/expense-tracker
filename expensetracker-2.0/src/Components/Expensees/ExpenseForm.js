@@ -139,25 +139,28 @@ const ExpenseForm = () => {
           <Form.Group className="form-floating my-2">
             <Form.Control
               type="text"
+              id='description'
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
-            <Form.Label>Description</Form.Label>
+            <Form.Label for='description'>Description</Form.Label>
           </Form.Group>
 
           <Form.Group className="form-floating my-2">
             <Form.Control
               type="number"
               value={amount}
+              id='amount spent'
               onChange={(event) => setAmount(event.target.value)}
             />
-            <Form.Label>Amount Spent</Form.Label>
+            <Form.Label for='amount spent'>Amount Spent</Form.Label>
           </Form.Group>
 
           <Form.Group className="form-floating my-2">
             <Form.Control
               as="select"
               value={category}
+              id='category'
               onChange={(event) => setCategory(event.target.value)}
             >
               <option value="" disabled>
@@ -169,7 +172,7 @@ const ExpenseForm = () => {
               <option value="rent">Rent</option>
               <option value="grocery">Grocery</option>
             </Form.Control>
-            <Form.Label>Category</Form.Label>
+            <Form.Label for='category'>Category</Form.Label>
           </Form.Group>
           <div className="d-flex justify-content-center mt-3">
             {editingItem ? (
