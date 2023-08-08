@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [mail, setMail] = useState('');
@@ -62,6 +63,10 @@ const SignUp = () => {
           </Form.Group>
           <div className='d-flex justify-content-center mt-3'>
             <Button variant='success' type='submit' className='rounded' disabled={!inputFilled || !correctPassword}>Create Account</Button>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <Link to="/login"
+            className="text-decoration-none text-gray-500 hover:text-gray-900">have account? sign in!</Link>
           </div>
           {created && <p>Account Created </p>}
         </Form>
