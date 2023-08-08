@@ -5,6 +5,7 @@ const SignUp = () => {
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [created, setCreated] = useState('');
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -24,7 +25,7 @@ const SignUp = () => {
       }
     }).then((res) => {
       if(res.ok) {  
-        alert('Account created')
+        setCreated(true);
         return res.json()
       } else {
         throw new Error('Authentication failed');
@@ -41,9 +42,9 @@ const SignUp = () => {
   const inputFilled = mail.trim() !== '' && password !== '' && confirmPassword !== '';
 
   return (
-    <div className='p-2'>
-      <Container className='border rounded shadow p-3 my-5' style={{ maxWidth: '650px' }}>
-        <div className='d-flex justify-content-center mb-3'>
+    <div className='p-2 backdrop-filter backdrop-blur bg-opacity-20 '>
+      <Container className=' rounded shadow p-3 my-5 bg-light' style={{ maxWidth: '650px' }}>
+        <div className='d-flex justify-content-center align-items-center mb-3'>
           <h1>Sign Up</h1>
         </div>
         <Form onSubmit={submitHandler} >
@@ -60,8 +61,9 @@ const SignUp = () => {
             <Form.Label htmlFor='confirmpassword'>Confirm Password</Form.Label>
           </Form.Group>
           <div className='d-flex justify-content-center mt-3'>
-            <Button variant='success' type='submit' className='rounded' disabled={!inputFilled || !correctPassword}>Sign Up</Button>
+            <Button variant='success' type='submit' className='rounded' disabled={!inputFilled || !correctPassword}>Create Account</Button>
           </div>
+          {created && <p>Account Created </p>}
         </Form>
       </Container>
     </div>
