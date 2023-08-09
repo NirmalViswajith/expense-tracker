@@ -1,9 +1,8 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
-
+//for Authentication
 const authentication = {
   isAuth: !!localStorage.getItem('idToken'),
 }
-
 const Authslice = createSlice({
   name: 'Authentication',
   initialState: authentication,
@@ -19,10 +18,27 @@ const Authslice = createSlice({
   }
 })
 
+
+//for mail handling
+const mailState = {
+  mails: []
+}
+const Mailslice = createSlice({
+  name:'MailBox',
+  initialState: mailState,
+  reducers: {
+    mail(state, action){
+      state.mails = action.payload;
+    }
+  }
+})
+//exporting actions
 export const AuthAction = Authslice.actions;
+export const MailAction = Mailslice.actions;
 const store = configureStore({
   reducer: {
-    auth: Authslice.reducer
+    auth: Authslice.reducer,
+    mail:Mailslice.reducer
   }
 })
 

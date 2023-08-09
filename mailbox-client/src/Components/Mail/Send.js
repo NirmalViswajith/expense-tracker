@@ -84,7 +84,7 @@ const Send = () => {
             onEditorStateChange={editorHandler}
           />
           <div className="d-flex justify-content-end">
-            <Button type="submit" variant="warning" className="mr-3">Send</Button>
+            <Button type="submit" variant="warning" className="mr-3">Compose</Button>
           </div>
         </Form>
       </Container>

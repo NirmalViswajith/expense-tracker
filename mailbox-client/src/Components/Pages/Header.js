@@ -20,6 +20,9 @@ const Header = () => {
           {auth && <Link to="/send" className="nav-link text-light">
             send
           </Link>}
+          {auth && <Link to="/inbox" className="nav-link text-light">
+            Inbox
+          </Link>}
           {auth && <Link to="/logout" className="nav-link text-light" onClick={logOutHandler}>
             Logout
           </Link>}

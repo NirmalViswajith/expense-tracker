@@ -14,7 +14,7 @@ const Home = () => {
 
       </div>
       <div className="d-flex justify-content-center">
-        <Button onClick={() => navigate('/send')}>Send Mail</Button>
+        <Button onClick={() => navigate('/send')}>Compose Mail</Button>
       </div>
     </div>
   );
