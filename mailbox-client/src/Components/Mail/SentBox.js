@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MailAction } from "../ReduxStore/AuthReducer";
 import { Container, Button } from "react-bootstrap";
@@ -8,11 +8,21 @@ const SentBox = () => {
   const myEmail = localStorage.getItem('email').replace(/[@.]/g,'');
   const dispatch = useDispatch();
   const sentBox = useSelector(state => state.mail.sentMails);
-  console.log(sentBox);
+  const [reRender, setreRender] = useState(true);
 
-  const deleteHandler = (id) => {
-
-  }
+  
+    const deleteHandler = async (id) => {
+      try{
+        const response = await fetch(`https://mailbox-client-e7886-default-rtdb.firebaseio.com/sentBox/${myEmail}/${id}.json`,{
+          method: 'DELETE'
+        })
+        const data = await response.json();
+        setreRender(prev => !prev);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+  
   useEffect(() => {
     const fetchData = async () => {
 
@@ -29,7 +39,7 @@ const SentBox = () => {
       }
     }
     fetchData();
-  },[])
+  },[reRender])
   return(
     <div>
       <Container>

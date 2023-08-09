@@ -2,7 +2,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthAction, MailAction } from "../ReduxStore/AuthReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const auth = useSelector(state => state.auth.isAuth);
@@ -15,6 +15,7 @@ const Header = () => {
     dispatch(AuthAction.logout());
     navigate('/');
   }
+  const [reRender, setreRender] = useState(true);
   const myEmail = localStorage.getItem('email').replace(/[@.]/g,'');
   useEffect(() => {
     let unRead = 0;
@@ -27,13 +28,14 @@ const Header = () => {
             unRead++;
           }
         }
+        setreRender(prev => !prev)
         dispatch(MailAction.updateUnread(unRead));
       } catch(error) {
         console.log(error);
       }
     }
     fetchData();
-  }, [])
+  }, [reRender])
   return(
     <div>
       <Navbar bg="dark" variant="dark">
