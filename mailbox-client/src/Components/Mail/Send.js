@@ -50,7 +50,8 @@ const Send = () => {
       body: JSON.stringify({
         recieverEmail: recieverEmail,
         subject: subject,
-        message: editorState.getCurrentContent().getPlainText()
+        message: editorState.getCurrentContent().getPlainText(),
+        isSeen: true
       }),
       headers: {
         'Content-type' : 'application/json'

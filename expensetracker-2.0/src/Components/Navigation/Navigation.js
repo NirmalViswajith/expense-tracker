@@ -11,6 +11,9 @@ const Navigation = (props) => {
   const dispatch = useDispatch();
   const login = useSelector(state => state.authReducer.isAuthenticated);
   const isDarkTheme = useSelector(state => state.themeReducer.isDark);
+ 
+
+
 
   useEffect(() => {
     const email = localStorage.getItem('email');
@@ -19,12 +22,14 @@ const Navigation = (props) => {
       dispatch(authAction.login());
     }
     toggleTheme();
+    
   },[])
   const toggleTheme = () => {
   
     dispatch(themeAction.toggletheme());
   };
 
+  
   const verify = () => {
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDR4pqugnslpdRrGntPXMBmg1o-FU1KU5w",

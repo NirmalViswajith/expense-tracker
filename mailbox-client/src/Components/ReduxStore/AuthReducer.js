@@ -21,14 +21,18 @@ const Authslice = createSlice({
 
 //for mail handling
 const mailState = {
-  mails: []
+  mails: [],
+  unRead: 0
 }
 const Mailslice = createSlice({
   name:'MailBox',
   initialState: mailState,
   reducers: {
-    mail(state, action){
+    updateInbox(state, action){
       state.mails = action.payload;
+    },
+    updateUnread(state, action){
+      state.unRead = action.payload;
     }
   }
 })

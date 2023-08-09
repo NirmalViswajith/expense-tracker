@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import Send from './Components/Mail/Send';
 import Header from './Components/Pages/Header';
 import Inbox from './Components/Mail/Inbox';
+import Messages from './Components/Mail/Messages';
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route path='/inbox' element={<Inbox />} />
         {auth && <Route path='/home' element={<Home />} />}
         <Route path='/send' element={<Send />} />
+        <Route path='/messages/:id' element={<Messages />} />
       </Routes>
     </div>
   );
