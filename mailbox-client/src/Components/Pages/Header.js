@@ -16,6 +16,15 @@ const Header = () => {
     navigate('/');
   }
   const [reRender, setreRender] = useState(true);
+  let intervalID = setInterval(()=>{
+    setreRender((prev)=>!prev);
+  }, 3000);
+
+  const clearInteravl=()=>{
+    clearInterval(intervalID);
+    console.log(intervalID);
+  }
+  
   const myEmail = localStorage.getItem('email').replace(/[@.]/g,'');
   useEffect(() => {
     let unRead = 0;
@@ -35,7 +44,7 @@ const Header = () => {
       }
     }
     fetchData();
-  }, [reRender])
+  }, [reRender]);
   return(
     <div>
       <Navbar bg="dark" variant="dark">
