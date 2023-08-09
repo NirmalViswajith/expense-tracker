@@ -8,6 +8,8 @@ import Send from './Components/Mail/Send';
 import Header from './Components/Pages/Header';
 import Inbox from './Components/Mail/Inbox';
 import Messages from './Components/Mail/Messages';
+import SentBox from './Components/Mail/SentBox';
+import SentBoxMessage from './Components/Mail/SentBoxMessage';
 
 
 
@@ -23,9 +25,11 @@ function App() {
         <Route path='/' element={<SignUp />} />
         <Route path='/login' element={<SignIn />} />
         <Route path='/inbox' element={<Inbox />} />
+        <Route path='/sent' element={<SentBox/>} /> 
         {auth && <Route path='/home' element={<Home />} />}
         <Route path='/send' element={<Send />} />
         <Route path='/messages/:id' element={<Messages />} />
+        <Route path='/sentMessage/:id' element={<SentBoxMessage />} />
       </Routes>
     </div>
   );

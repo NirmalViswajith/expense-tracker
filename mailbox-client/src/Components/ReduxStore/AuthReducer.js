@@ -22,6 +22,7 @@ const Authslice = createSlice({
 //for mail handling
 const mailState = {
   mails: [],
+  sentMails: [],
   unRead: 0
 }
 const Mailslice = createSlice({
@@ -30,6 +31,9 @@ const Mailslice = createSlice({
   reducers: {
     updateInbox(state, action){
       state.mails = action.payload;
+    },
+    updateSentBox(state, action){
+      state.sentMails = action.payload
     },
     updateUnread(state, action){
       state.unRead = action.payload;

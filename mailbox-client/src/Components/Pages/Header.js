@@ -40,10 +40,13 @@ const Header = () => {
         <Navbar.Brand>MailBox Client</Navbar.Brand>
         <Nav className="ml-auto">
           {auth && <Link to="/send" className="nav-link text-light">
-            send
+            Send
           </Link>}
           {auth && <Link to="/inbox" className="nav-link text-light">
             Inbox {unRead}
+          </Link>}
+          {auth && <Link to="/sent" className="nav-link text-light">
+            SentBox
           </Link>}
           {auth && <Link to="/logout" className="nav-link text-light" onClick={logOutHandler}>
             Logout

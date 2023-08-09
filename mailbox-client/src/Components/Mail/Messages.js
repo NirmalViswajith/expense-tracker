@@ -5,11 +5,11 @@ import { Container } from 'react-bootstrap';
 
 const Messages = () => {
   const { id } = useParams();
-  console.log(id);
+  
   const mailBox = useSelector(state => state.mail.mails);
-  console.log(mailBox)
+ 
   const myEmail = localStorage.getItem('email').replace(/[@.]/g, '');
-  console.log(myEmail);
+ 
   
   const singleMail = mailBox.filter((mails) => mails.id === id);
   console.log(singleMail[0].message);
