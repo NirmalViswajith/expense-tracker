@@ -11,6 +11,18 @@ const Inbox = () => {
   console.log(mailInbox)
   const [reRender, setreRender] = useState(false);
 
+  const deleteHandler = async (id) => {
+    try{
+      const response = await fetch(`https://mailbox-client-e7886-default-rtdb.firebaseio.com/inbox/${myEmail}/${id}.json`,{
+        method: 'DELETE'
+      })
+      const data = await response.json();
+      setreRender(prev => !prev);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +38,8 @@ const Inbox = () => {
       }
     }
     fetchData();
-  }, [])
+  }, [reRender])
+
   const dot = {
     width: '8px',
     height: '8px',
@@ -43,9 +56,10 @@ const Inbox = () => {
         <div style={{ maxWidth: '600px' }}>
           <ul className=''>
             {mailInbox.map((mail) => (
-              <li className='d-flex align-items-center border rounded bg-light decoration-none' key={mail.id}>
+              <li className='d-flex align-items-center border rounded bg-light decoration-none mb-2' key={mail.id}>
                 {mail.isSeen ? <Button variant='primary' className="ml-2"></Button>: <Button variant="success" className="ml-2"></Button>}
                 <Link to={`/messages/${mail.id}`} className="text-decoration-none text-dark"><p className=" mt-3 ml-3" >From: {mail.recieverEmail}</p></Link>
+                <Button variant="danger" className="ml-auto mr-3" onClick={() => deleteHandler(mail.id)}>Delete</Button>
               </li>
             ))}
           </ul>
