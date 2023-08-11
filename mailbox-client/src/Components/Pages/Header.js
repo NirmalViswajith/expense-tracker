@@ -25,7 +25,9 @@ const Header = () => {
     console.log(intervalID);
   }
   
-  const myEmail = localStorage.getItem('email').replace(/[@.]/g,'');
+  const storedEmail = localStorage.getItem('email');
+const myEmail = storedEmail ? storedEmail.replace(/[@.]/g, '') : '';
+
   useEffect(() => {
     let unRead = 0;
     const fetchData = async () => {
@@ -37,13 +39,14 @@ const Header = () => {
             unRead++;
           }
         }
-        setreRender(prev => !prev)
         dispatch(MailAction.updateUnread(unRead));
       } catch(error) {
         console.log(error);
       }
     }
+
     fetchData();
+    //return clearInteravl(intervalID);
   }, [reRender]);
   return(
     <div>

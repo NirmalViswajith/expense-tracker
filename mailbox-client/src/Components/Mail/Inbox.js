@@ -5,7 +5,7 @@ import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Messages from "./Messages";
 const Inbox = () => {
-  const myEmail = localStorage.getItem('email').replace(/[@.]/g, '');
+  const myEmail = localStorage.getItem('recieverEmail');
   const dispatch = useDispatch();
   const mailInbox = useSelector(state => state.mail.mails);
   console.log(mailInbox)
@@ -58,7 +58,7 @@ const Inbox = () => {
             {mailInbox.map((mail) => (
               <li className='d-flex align-items-center border rounded bg-light decoration-none mb-2' key={mail.id}>
                 {mail.isSeen ? <Button variant='primary' className="ml-2"></Button>: <Button variant="success" className="ml-2"></Button>}
-                <Link to={`/messages/${mail.id}`} className="text-decoration-none text-dark"><p className=" mt-3 ml-3" >From: {mail.recieverEmail}</p></Link>
+                <Link to={`/messages/${mail.id}`} className="text-decoration-none text-dark"><p className=" mt-3 ml-3" >From: {mail.from}</p></Link>
                 <Button variant="danger" className="ml-auto mr-3" onClick={() => deleteHandler(mail.id)}>Delete</Button>
               </li>
             ))}

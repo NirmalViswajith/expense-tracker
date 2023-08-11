@@ -49,7 +49,7 @@ const SentBox = () => {
           {sentBox.map((mail) => (
     <li className='d-flex align-items-center border rounded bg-light decoration-none mb-2' key={mail.id}>
       <Button variant="success" className="ml-2"></Button>
-      <Link to={`/sentMessage/${mail.id}`} className="text-decoration-none text-dark"><p className=" mt-3 ml-3" >From: {mail.myEmail}</p></Link>
+      <Link to={`/sentMessage/${mail.id}`} className="text-decoration-none text-dark"><p className=" mt-3 ml-3" >To: {mail.to}</p></Link>
       <Button variant="danger" className="ml-auto mr-3" onClick={() => deleteHandler(mail.id)}>Delete</Button>
     </li>
   ))}

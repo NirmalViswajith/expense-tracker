@@ -13,6 +13,7 @@ const Authslice = createSlice({
     logout(state){
       localStorage.removeItem('email');
       localStorage.removeItem('idToken');
+      localStorage.removeItem('recieverEmail');
       state.isAuth = false;
     }
   }

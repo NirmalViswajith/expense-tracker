@@ -14,8 +14,8 @@ const SentBoxMessage = () => {
   return(
     <div>
       <Container className="border rounded shadow bg-light mt-5">
-        <h1 className="text-xl font-bold">From:- </h1>
-        <p className="ml-5">{singleMail[0].myEmail}</p>
+        <h1 className="text-xl font-bold">To:- </h1>
+        <p className="ml-5">{singleMail[0].to}</p>
         <h2 className="text-xl">Subject:- </h2>
         <p className="ml-5">{singleMail[0].subject}</p>
         <h2 className="text-xl">Message:- </h2>

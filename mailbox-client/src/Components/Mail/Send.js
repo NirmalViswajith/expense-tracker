@@ -25,10 +25,11 @@ const Send = () => {
     event.preventDefault();
     const senderEmail = localStorage.getItem('email').replace(/[@.]/g,'');
     const recieverEmail = email.replace(/[@.]/g,'');
+    localStorage.setItem('recieverEmail', recieverEmail);
     await fetch(`https://mailbox-client-e7886-default-rtdb.firebaseio.com/sentBox/${senderEmail}.json`,{
       method:'POST',
       body: JSON.stringify({
-        myEmail: senderEmail,
+        to: recieverEmail,
         subject: subject,
         message: editorState.getCurrentContent().getPlainText()
       }),
@@ -48,7 +49,7 @@ const Send = () => {
     await fetch(`https://mailbox-client-e7886-default-rtdb.firebaseio.com/inbox/${recieverEmail}.json`,{
       method:'POST',
       body: JSON.stringify({
-        recieverEmail: recieverEmail,
+        from: senderEmail,
         subject: subject,
         message: editorState.getCurrentContent().getPlainText(),
         isSeen: true
