@@ -1,37 +1,33 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Components/Pages/Home';
-import SignUp from './Components/Auth/SignUp';
-import SignIn from './Components/Auth/SignIn';
-import {Routes, Route} from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Send from './Components/Mail/Send';
-import Header from './Components/Pages/Header';
-import Inbox from './Components/Mail/Inbox';
-import Messages from './Components/Mail/Messages';
-import SentBox from './Components/Mail/SentBox';
-import SentBoxMessage from './Components/Mail/SentBoxMessage';
 
-
+import { Fragment } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import SignUp from './Components/Pages/SignUp';
+import Welcome from './Components/Pages/Welcome';
+import {useSelector} from 'react-redux'
+import ForgotPassword from './Components/Pages/ForgotPassword';
+import Send from './Components/Email/Send';
+import ReadMsg from './Components/Email/ReadMsg';
+import Inbox from './Components/Email/Inbox';
+import SentBox from './Components/Email/Sentbox';
 
 function App() {
-  const auth = useSelector(state => state.auth.isAuth);
-  
-  console.log(auth)
+
+  const isAuth=useSelector(state=>state.auth.isAuthenicate)
+  console.log(isAuth);
   return (
-    <div>
-      
-      <Header />
+    <Fragment>
       <Routes>
-        <Route path='/' element={<SignUp />} />
-        <Route path='/login' element={<SignIn />} />
-        <Route path='/inbox' element={<Inbox />} />
-        <Route path='/sent' element={<SentBox/>} /> 
-        {auth && <Route path='/home' element={<Home />} />}
-        <Route path='/send' element={<Send />} />
-        <Route path='/messages/:id' element={<Messages />} />
-        <Route path='/sentMessage/:id' element={<SentBoxMessage />} />
+        
+      <Route path='/' element={isAuth ? <Welcome /> : <SignUp />}></Route>
+      {/* <Route path='/welcome' element={isAuth ? <Welcome /> : <SignUp />} /> */}
+      <Route path='/forgotPassword' element={!isAuth ? <ForgotPassword /> : <Welcome />} />
+      <Route path='/send' element={isAuth ? <Send /> : <SignUp />} />
+      <Route path='/inbox' element={isAuth ? <Inbox /> : <SignUp />} />
+      <Route path='/sentbox' element={isAuth ? <SentBox /> : <SignUp />} />
+      <Route path='/message/:id' element={isAuth ? <ReadMsg /> : <SignUp />} /> 
       </Routes>
-    </div>
+      </Fragment>
   );
 }
 
