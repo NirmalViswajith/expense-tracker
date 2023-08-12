@@ -1,13 +1,14 @@
 
 .main{
   width: 100vw;
+  color: white;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(216, 214, 214);
+  background-color: rgb(33, 31, 31);
 }
 .header{
   width: 95%;
@@ -15,6 +16,4 @@
   align-items: center;
   justify-content: space-between;
 }
-.welcome{
 
-}

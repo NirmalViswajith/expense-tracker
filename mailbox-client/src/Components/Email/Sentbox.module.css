@@ -1,11 +1,21 @@
-.delete{
+/* Apply margin and border styles to .delete elements */
+.delete {
   margin-left: 20px;
+  margin-top: 5px;
+  border: 1px solid rgb(88, 46, 46); /* Add border */
+  border-radius: 5px; /* Add rounded corners */
+  padding: 10px;
+  width: 70px; /* Add some padding for visual spacing */
 }
-.delete button{
-  border: none;
-  background: transparent;
+
+/* Style the delete button within .delete elements */
+.delete button {
   color: rgb(88, 46, 46);
+  border: none; /* Remove default button border */
+  background-color: transparent; /* Remove default button background */
 }
+
+/* Change button color on hover */
 .delete button:hover {
   color: rgb(215, 29, 29);
 }

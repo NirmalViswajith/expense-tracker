@@ -48,7 +48,7 @@ const SubjectchangeHandler=(e)=>{
         }
        }).then((res)=>{
         if(!res.ok){
-            alert(res.error.message)
+            console.log(res.error.message)
         }else{
             console.log('successfull');
             console.log(sender1);
@@ -70,7 +70,7 @@ const SubjectchangeHandler=(e)=>{
         }
        }).then((res)=>{
         if(!res.ok){
-            alert(res.error.message)
+            console.log(res.error.message)
         }else{
             console.log('successfull');
         }

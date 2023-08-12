@@ -27,7 +27,7 @@ const Welcome = () => {
   const logoutHandler =()=>{
     dispatch(authActions.logout());
   }
-  let noOfUnread=0;
+  
 
   useEffect(()=>{
     const fetchDaata=async()=>{
@@ -35,6 +35,7 @@ const Welcome = () => {
         const reponse=await fetch(`https://mailbox-client-e7886-default-rtdb.firebaseio.com/inbox/${myEmail}.json`);
 
         const mailData=await reponse.json();
+        let noOfUnread = 0;
         for(let key in mailData){
             if(mailData[key].dot===true){
               noOfUnread++

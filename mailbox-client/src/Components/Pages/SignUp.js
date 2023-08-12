@@ -1,5 +1,5 @@
 
-import classes from './SignUp.module.css'
+import { Form, Button, Container } from 'react-bootstrap';
 
 import React, { Fragment, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -70,34 +70,81 @@ const passwordChangeHandler =(e)=>{
       
     }
     return (
-        <Fragment>
-        <section className={classes.auth}>
-            <h1>{isLogin ? 'Login' : 'Create new account'}</h1>
-            <form onSubmit={submitHandler}>
-                <div className={classes.control}>
-                    <label htmlFor='email'>Your Email</label>
-                    <input type='email'  required onChange={emailChangeHandler} value={email} />
+        <div className="d-flex justify-content-center">
+            <Container style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh', // Make sure the container takes up the full viewport height
+    }}>
+            <Form onSubmit={submitHandler} className="p-6 bg-white rounded-lg shadow-md" style={{ maxWidth: '600px' }}>
+                <h1 className="text-xl mb-4 font-semibold text-center">
+                    {isLogin ? 'Login' : 'Create New Account'}
+                </h1>
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label className='mr-4'>Email Address:</Form.Label>
+                    <Form.Control
+                    className='bg-dark'
+                        type="email"
+                        required
+                        onChange={emailChangeHandler}
+                        value={email}
+                        placeholder="Enter your email"
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label className='mr-5'>Password:</Form.Label>
+                    <Form.Control
+                        type="password"
+                        required
+                        onChange={passwordChangeHandler}
+                        value={password}
+                        placeholder="Enter your password"
+                    />
+                </Form.Group>
+                {!isLogin && (
+                    <Form.Group className="mb-3" controlId="confPass">
+                        <Form.Label className='mr-5'>Confirm Password:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            required
+                            onChange={confPassChangeHandler}
+                            value={confPass}
+                            placeholder="Confirm your password"
+                        />
+                    </Form.Group>
+                )}
+                <div className=" d-flex justify-content-center mb-3">
+                    {isLogin && (
+                        <Link className="block text-sm mb-2 text-blue-500 hover:underline" to="/forgotPassword">
+                            Forgot Password?
+                        </Link>
+                    )}
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        className={isCursorAllow ? 'cursor-not-allowed' : 'w-100'}
+                        style={{border: '2px solid #000', // Replace with your preferred border style
+                        borderRadius: '6px',
+                    maxWidth:'90px',
+                padding: '5px'   }}
+                        disabled={isCursorAllow}
+                    >
+                        {isLogin ? <b>Login</b> : 'Create Account'}
+                    </Button>
                 </div>
-                <div className={classes.control}>
-                    <label htmlFor='password'>Your Password</label>
-                    <input type='password'  required onChange={passwordChangeHandler} value={password} />
-                </div>
-                {!isLogin && <div className={classes.control}>
-                    <label htmlFor='confpassword'>Confirm Password</label>
-                    <input type='password' required onChange={confPassChangeHandler} value={confPass} />
-                </div>}
-                <div className={classes.actions}>
-                   {isLogin && <Link className={classes.forget} style={{marginBottom:'5px',textDecoration:'none'}} to='/forgotPassword'>Forgot Password ?</Link>}
-                    <button type='submit' style={{'cursor':isCursorAllow ? 'not-allowed':'pointer'}} >{isLogin ? 'Login' : 'Create Account'}</button>
-                    <button type='button' className={classes.toggle} onClick={switchAuthModeHandler}>{
-                        isLogin ? "Don't have an account sign Up" : 'Login with existing account'
-                    }</button>
-                </div>
-            </form>
-        </section>
-    </Fragment>
-      )
-    }
+                <Button
+                    type="button"
+                    variant="link"
+                    className="text-blue-500 hover:underline w-100"
+                    onClick={switchAuthModeHandler}
+                >
+                    {isLogin ? "Don't have an account? Sign Up" : 'Login with an existing account'}
+                </Button>
+            </Form>
+            </Container>
+        </div>)    }
     
 
 export default SignUp

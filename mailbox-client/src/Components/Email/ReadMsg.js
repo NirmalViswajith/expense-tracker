@@ -3,6 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import classes from './ReadMsg.module.css';
+import { Container } from 'react-bootstrap';
 
 const ReadMsg = () => {
     const {id}=useParams();
@@ -10,7 +11,11 @@ const ReadMsg = () => {
     const myEmail=localStorage.getItem('email').replace(/['@','.']/g,'');
 
     const singleMail=mails.filter((item)=>item.id===id);
+    console.log(singleMail)
     const message=singleMail[0].message
+    const sender = singleMail[0].sender;
+    const subject = singleMail[0].subject;
+
     console.log(mails,'Single-message');
     useEffect(()=>{
       const fetchData=async ()=>{
@@ -28,7 +33,7 @@ const ReadMsg = () => {
           console.log(data);
         }
        catch (error) {
-        alert(error)
+        console.log(error)
       }
     }
       fetchData();
@@ -36,7 +41,16 @@ const ReadMsg = () => {
 
   return (
     <Fragment>
-    <div className={classes.message}>{message}</div>
+    <div className='d-flex justify-content-center'>
+      <Container className='border rounded shadow bg-light p-2 mt-5 ml-5' style={{maxWidth:'600px'}}>
+        <h1 className='font-bold'>From:- </h1>
+        <p className='mb-2 ml-2'>{sender}</p>
+        <h1 className='font-bold'>Subject:-</h1>
+        <p className='mb-2 ml-2'>{subject}</p>
+        <h1 className='font-bold'>Message:-</h1>
+        <p className='mb-2 ml-2'>{message}</p>
+      </Container>
+      </div>
     </Fragment>
   )
 }
