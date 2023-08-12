@@ -48,6 +48,8 @@ const SentBox = () => {
   return (
     <div className='d-flex justify-content-center mb-5'>
       <Container className="mt-4 border rounded shadow bg-light ml-5" style={{ maxWidth: '650px' }}>
+        <h1 className='mb-2 mt-3'>SentBox</h1>
+
         {mailInSentbox.length > 0 ? (
           <div>
             {mailInSentbox.map((item) => (

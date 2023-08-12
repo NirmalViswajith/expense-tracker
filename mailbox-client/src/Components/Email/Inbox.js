@@ -46,7 +46,10 @@ const Inbox = () => {
     fetchDaata();
   }, [reRender])
   return (
-    <div className={classes.main} style={{ maxWidth: '600px' }}>
+    <div>
+      <h1 className='text-xl ml-5 mb-2 mt-3'>Inbox</h1>
+      <div className={classes.main} style={{ maxWidth: '600px' }}>
+      
       {mailInInbox.length > 0 ?
         (<div className={classes.row}>
           {
@@ -74,6 +77,7 @@ const Inbox = () => {
           }
         </div>) : <p>Inbox is empty</p>}
 
+    </div>
     </div>
   )
 }
